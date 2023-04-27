@@ -1,8 +1,110 @@
-.event-descr {
+/*.event-descr {
   background-color: #b18f74;
   width: 100%;
   padding: 10px;
   border-radius: 10px;
+}*/
+.container-card {
+  width: 250px;
+  min-height: 300px;
+  height: 100%;
+  perspective: 800px;
+  margin: 50px;
+
+  .front-card,
+  .back-card {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    backface-visibility: hidden;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+  }
+
+  .front-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+
+    .title-event {
+      width: 80%;
+      margin-top: 20px;
+      text-align: center;
+    }
+  }
+
+  .back-card {
+    height: auto;
+    transform: rotateY(180deg);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 300px;
+    padding: 20px 0;
+    overflow: hidden;
+  }
+}
+
+.container-card:hover > .card {
+  cursor: pointer;
+  transform: rotateY(180deg);
+}
+
+.card {
+  border-radius: 10px;
+  height: auto;
+  min-height: 300px;
+  width: 100%;
+  position: relative;
+  transition: transform 1500ms;
+  transform-style: preserve-3d;
+  z-index: 0;
+  text-overflow: ellipsis;
+  background: linear-gradient(
+    155deg,
+    transparent 0%,
+    rgba(134, 75, 4, 0.5) 20%,
+    rgba(175, 119, 73, 0.35) 70%,
+    transparent 100%
+  );
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  ::after {
+    content: '';
+    border-radius: 10px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: linear-gradient(155deg, #864b04 0%, #af7749 80%);
+    opacity: 50%;
+    mask: linear-gradient(
+        to left,
+        transparent calc(100% - 10px),
+        #fff calc(100% - 3px + 1px)
+      ),
+      linear-gradient(
+        to right,
+        transparent calc(100% - 10px),
+        #fff calc(100% - 3px + 1px)
+      ),
+      linear-gradient(
+        to bottom,
+        transparent calc(100% - 10px),
+        #fff calc(100% - 3px + 1px)
+      ),
+      linear-gradient(
+        to top,
+        transparent calc(100% - 10px),
+        #fff calc(100% - 3px + 1px)
+      );
+    background-color: border-box;
+    background-clip: content-box;
+  }
 }
 
 .card-section {
