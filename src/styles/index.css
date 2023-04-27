@@ -6,6 +6,9 @@
   text-decoration: none;
 }
 
-.card-section {
+.event-descr {
   background-color: #b18f74;
+  width: 20vw;
+  padding: 10px;
+  border-radius: 10px;
 }/*# sourceMappingURL=index.css.map */

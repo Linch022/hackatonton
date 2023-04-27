@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import Card from './card/Card';
 
 const Mapquest = ({ height, width, center, tileLayer, zoom, apiKey }) => {
   useEffect(() => {
@@ -16,6 +17,12 @@ const Mapquest = ({ height, width, center, tileLayer, zoom, apiKey }) => {
     map.addControl(
       window.L.mapquest.geocodingControl({
         position: 'topright',
+      })
+    );
+
+    map.addLayer(
+      window.L.mapquest.geocodingLayer({
+        geocodingResponse: Card,
       })
     );
   }, []);
