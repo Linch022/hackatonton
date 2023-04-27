@@ -13,9 +13,9 @@ const Card = ({ artistEvent, artistInfos, selectEvent }) => {
     }-${year} / ${hours}h${String(minutes).padStart(2, '0')}`;
   };
 
-  // const handleClickShowArtist = () => {
-  //   console.log('do Something on Click');
-  // };
+  const handleClickShowArtist = () => {
+    console.log('do Something on Click');
+  };
 
   console.log('akekoukou', artistInfos);
 
@@ -42,7 +42,11 @@ const Card = ({ artistEvent, artistInfos, selectEvent }) => {
                   if (index > 12) {
                     return null;
                   }
-                  return <li key={name}>{name}</li>;
+                  return (
+                    <li key={name} onClick={() => handleClickShowArtist()}>
+                      {name}
+                    </li>
+                  );
                 })}
               </ul>
             </div>

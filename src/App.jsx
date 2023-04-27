@@ -120,6 +120,7 @@ function App() {
               <Popup className='custom-popup'>
                 <Card
                   artistEvent={artistEvents[index]}
+                  artistInfos={artistInfos}
                   selectEvent={handleSelectEvent}
                 />
               </Popup>
