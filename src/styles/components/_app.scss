@@ -1,7 +1,13 @@
-.container {
+.leaflet-container {
   height:100vh
 }
 
-.custom-popup {
-  opacity: 0.5;
+.leaflet-popup-content-wrapper {
+  background-color: #b18f74 !important;
+  box-shadow: #b18f74 !important;
+  transform: translateY(160px)
+}
+
+.leaflet-popup-tip {
+  background: transparent !important;
 }
