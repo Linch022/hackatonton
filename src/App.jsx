@@ -7,7 +7,7 @@ import Card from './components/card/Card';
 function App() {
   const [lat, setLat] = useState('45.71337');
   const [lng, setLng] = useState('5.12919');
-  const [searchInput, setSearchInput] = useState('Gojira');
+  const [searchInput, setSearchInput] = useState('Perc');
   const [artistInfos, setArtistInfos] = useState(null);
   const [artistEvents, setArtistEvents] = useState(null);
 
