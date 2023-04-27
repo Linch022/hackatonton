@@ -58,21 +58,6 @@ function App() {
     }
     setArray(markers);
   }, [artistEvents]);
-  console.log(array);
-
-  const handleClickLat = () => {
-    for (let i = 0; i < artistEvents.length; i++) {
-      setLat(artistEvents[i].venue.latitude);
-    }
-  };
-
-  console.log(artistEvents);
-
-  const handleClickLng = () => {
-    for (let i = 0; i < artistEvents.length; i++) {
-      setLng(artistEvents[i].venue.longitude);
-    }
-  };
 
   const [selectEvent, setSelectEvent] = useState(null);
   const handleSelectEvent = (event) => {
@@ -93,16 +78,10 @@ function App() {
   };
 
   return (
-    <MapContainer
-      center={[-30, 30]}
-      zoom={3}
-      minZoom={3}
-      // maxBounds={bounds}
-      // maxBoundsViscosity={'0.5'}
-    >
+    <MapContainer center={[-30, 30]} zoom={3} minZoom={3} trackResize>
       {artistEvents && artistEvents.length === 0 && (
         <div className='pas-concert'>
-          <p>Déso pélo</p>
+          <h1>{`Désolé ${searchInput} n'a pas de concerts prévus bientôt`}</h1>
         </div>
       )}
       {/* <Card artistEvents={artistEvents} selectEvent={handleSelectEvent} /> */}

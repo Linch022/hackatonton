@@ -320,11 +320,15 @@
 }
 
 .pas-concert {
+  position: absolute;
   display: inline-block;
   z-index: 1000;
+  top: 10%;
+  left: 30%;
+  height: 200px;
+  width: 500px;
+  border: 1px solid black;
+  text-align: center;
+  background-color: rgb(32, 81, 124);
+  border-radius: 20px;
 }
-
-.pas-concert {
-  display: inline-block;
-  z-index: 1000;
-} /*# sourceMappingURL=index.css.map */
