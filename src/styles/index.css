@@ -6,6 +6,36 @@
   text-decoration: none;
 }
 
+.leaflet-popup-content-wrapper {
+  background-color: transparent !important;
+  box-shadow: none !important;
+}
+
+.leaflet-popup-tip {
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.leaflet-container {
+  height: 200vh;
+}
+
+.cluster-icon {
+  height: 3rem;
+  width: 3rem;
+  border-radius: 50%;
+  background: url("../img/vinyl.svg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  transform: translate(-25%, -25%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 900;
+  font-size: 1.5rem;
+  color: white;
+}
+
 .container-card {
   width: 250px;
   min-height: 300px;
@@ -80,6 +110,11 @@
           mask: linear-gradient(to left, transparent calc(100% - 10px), #fff calc(100% - 3px + 1px)), linear-gradient(to right, transparent calc(100% - 10px), #fff calc(100% - 3px + 1px)), linear-gradient(to bottom, transparent calc(100% - 10px), #fff calc(100% - 3px + 1px)), linear-gradient(to top, transparent calc(100% - 10px), #fff calc(100% - 3px + 1px));
   background-color: border-box;
   background-clip: content-box;
+}
+
+.card-section {
+  background-color: #b18f74;
+  width: 100%;
 }
 
 .search-buttons-container {
