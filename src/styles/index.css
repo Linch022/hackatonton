@@ -6,6 +6,124 @@
   text-decoration: none;
 }
 
+.container-card {
+  width: 250px;
+  min-height: 300px;
+  height: 100%;
+  perspective: 800px;
+  margin: 50px;
+}
+.container-card .front-card,
+.container-card .back-card {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  backface-visibility: hidden;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+.container-card .front-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+.container-card .front-card .title-event {
+  width: 80%;
+  margin-top: 20px;
+  text-align: center;
+}
+.container-card .back-card {
+  height: auto;
+  transform: rotateY(180deg);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 300px;
+  padding: 20px 0;
+  overflow: hidden;
+}
+
+.container-card:hover > .card {
+  cursor: pointer;
+  transform: rotateY(180deg);
+}
+
+.card {
+  border-radius: 10px;
+  height: auto;
+  min-height: 300px;
+  width: 100%;
+  position: relative;
+  transition: transform 1500ms;
+  transform-style: preserve-3d;
+  z-index: 0;
+  text-overflow: ellipsis;
+  background: linear-gradient(
+    155deg,
+    transparent 0%,
+    rgba(134, 75, 4, 0.5) 20%,
+    rgba(175, 119, 73, 0.35) 70%,
+    transparent 100%
+  );
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.card ::after {
+  content: '';
+  border-radius: 10px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(155deg, #864b04 0%, #af7749 80%);
+  opacity: 50%;
+  -webkit-mask: linear-gradient(
+      to left,
+      transparent calc(100% - 10px),
+      #fff calc(100% - 3px + 1px)
+    ),
+    linear-gradient(
+      to right,
+      transparent calc(100% - 10px),
+      #fff calc(100% - 3px + 1px)
+    ),
+    linear-gradient(
+      to bottom,
+      transparent calc(100% - 10px),
+      #fff calc(100% - 3px + 1px)
+    ),
+    linear-gradient(
+      to top,
+      transparent calc(100% - 10px),
+      #fff calc(100% - 3px + 1px)
+    );
+  mask: linear-gradient(
+      to left,
+      transparent calc(100% - 10px),
+      #fff calc(100% - 3px + 1px)
+    ),
+    linear-gradient(
+      to right,
+      transparent calc(100% - 10px),
+      #fff calc(100% - 3px + 1px)
+    ),
+    linear-gradient(
+      to bottom,
+      transparent calc(100% - 10px),
+      #fff calc(100% - 3px + 1px)
+    ),
+    linear-gradient(
+      to top,
+      transparent calc(100% - 10px),
+      #fff calc(100% - 3px + 1px)
+    );
+  background-color: border-box;
+  background-clip: content-box;
+}
+
 .search-buttons-container {
   position: fixed;
   top: 0;
@@ -151,6 +269,7 @@
   flex-direction: row;
   flex-wrap: wrap;
   transition: 1s ease-in-out;
+  justify-content: center;
 }
 .proposal-container .proposal-buttons .proposal-button {
   width: 200px;
@@ -168,10 +287,6 @@
   transform: translateY(100px);
   opacity: 1;
 }
-.card-section {
-  background-color: #b18f74;
-} /*# sourceMappingURL=index.css.map */
-
 .leaflet-container {
   height: 200vh;
 }
@@ -190,4 +305,9 @@
   font-weight: 900;
   font-size: 1.5rem;
   color: white;
+}
+
+.pas-concert {
+  display: inline-block;
+  z-index: 1000;
 }
