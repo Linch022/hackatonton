@@ -1,3 +1,9 @@
+/*.event-descr {
+  background-color: #b18f74;
+  width: 100%;
+  padding: 10px;
+  border-radius: 10px;
+}*/
 .container-card {
   width: 250px;
   min-height: 300px;
@@ -99,4 +105,9 @@
     background-color: border-box;
     background-clip: content-box;
   }
+}
+
+.card-section {
+  background-color: #b18f74;
+  width: 100%;
 }
