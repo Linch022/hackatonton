@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import Mapquest from './components/card/Mapquest';
+import Mapquest from './components/Mapquest';
 import './styles/index.scss';
 import axios from 'axios';
 import Card from './components/card/Card';
@@ -66,9 +66,13 @@ function App() {
 
       markers.push(marker);
     };
-    addMarker(lat, lng);
-    // setCenter(lat, lng);
-  }, [lat, lng]);
+    if (artistEvents) {
+      artistEvents.forEach((event) => {
+        const { venue } = event;
+        addMarker(venue.latitude, venue.longitude);
+      });
+    }
+  }, [artistEvents]);
 
   const handleClickLat = () => {
     for (let i = 0; i < artistEvents.length; i++) {
