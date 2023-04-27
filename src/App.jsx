@@ -3,6 +3,8 @@ import Mapquest from './components/Mapquest';
 import './styles/index.scss';
 import axios from 'axios';
 import Card from './components/card/Card';
+import Search from './components/Search';
+import Proposal from './components/Proposal';
 
 function App() {
   const [lat, setLat] = useState('45.71337');
@@ -11,7 +13,7 @@ function App() {
   const [artistInfos, setArtistInfos] = useState(null);
   const [artistEvents, setArtistEvents] = useState(null);
 
-  const callAPIs = () => {
+  useEffect(() => {
     axios
       .get(
         `https://www.theaudiodb.com/api/v1/json/523532/search.php?s=${searchInput
@@ -33,7 +35,8 @@ function App() {
         setArtistEvents(res.data);
       })
       .catch((err) => console.error(err.message));
-  };
+    console.log(searchInput);
+  }, [searchInput]);
 
   console.log(artistEvents);
 
@@ -97,9 +100,6 @@ function App() {
 
   return (
     <div className='container'>
-      <button type='button' onClick={callAPIs}>
-        callAPIS
-      </button>
       <button
         type='button'
         onClick={() => {
@@ -118,6 +118,10 @@ function App() {
         zoom={3}
         apiKey='04fOmiVjdX1XrN84jFjaBqTNufknQw9k'
       />
+      <div className='search-buttons-container'>
+        <Search setSearchInput={setSearchInput} />
+        <Proposal setSearchInput={setSearchInput} />
+      </div>
     </div>
   );
 }
