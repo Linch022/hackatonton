@@ -104,7 +104,11 @@ function App() {
         >
           console artists states
         </button>
-        <Card artistEvents={artistEvents} selectEvent={handleSelectEvent} />
+        <Card
+          artistEvents={artistEvents}
+          artistInfos={artistInfos}
+          selectEvent={handleSelectEvent}
+        />
         <TileLayer url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png' />
         <MarkerClusterGroup
           chunkedLoading
