@@ -10,8 +10,6 @@ import vinyl from './img/vinyl.svg';
 import MarkerClusterGroup from 'react-leaflet-cluster';
 
 function App() {
-  const [lat, setLat] = useState('45.71337');
-  const [lng, setLng] = useState('5.12919');
   const [searchInput, setSearchInput] = useState('the weeknd');
   const [artistInfos, setArtistInfos] = useState(null);
   const [artistEvents, setArtistEvents] = useState(null);
@@ -84,7 +82,11 @@ function App() {
   return (
     <MapContainer center={[45.71337, 5.12919]} zoom={3}>
       <div className='container'>
-        {/* <Card artistEvents={artistEvents} selectEvent={handleSelectEvent} /> */}
+        <Card
+          artistEvents={artistEvents}
+          artistInfos={artistInfos}
+          selectEvent={handleSelectEvent}
+        />
         <TileLayer url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png' />
         <MarkerClusterGroup
           chunkedLoading
@@ -95,6 +97,7 @@ function App() {
               <Popup className='custom-popup'>
                 <Card
                   artistEvent={artistEvents[index]}
+                  artistInfos={artistInfos}
                   selectEvent={handleSelectEvent}
                 />
               </Popup>
