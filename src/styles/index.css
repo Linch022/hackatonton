@@ -174,4 +174,11 @@
 .proposal-container .visible {
   transform: translateY(100px);
   opacity: 1;
-}/*# sourceMappingURL=index.css.map */
+}
+.card-section {
+  background-color: #b18f74;
+} /*# sourceMappingURL=index.css.map */
+
+.leaflet-container {
+  height: 200vh;
+}
