@@ -1,33 +1,33 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import React from 'react';
 
-const Card = () => {
-  const [urlApi, setUrlApi] = useState(
-    `https://rest.bandsintown.com/artists/Iron%20Maiden/events?app_id=12`
-  );
-  const [eventData, setEventData] = useState([]);
-
-  useEffect(() => {
-    const getEventApi = urlApi;
-
-    axios
-      .get(getEventApi)
-      .then((resp) => {
-        console.log(resp.data);
-        setEventData(resp.data);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-  }, [urlApi]);
+const Card = ({ artistEvents, selectEvent }) => {
+  const formatDate = (datetime) => {
+    const date = new Date(datetime);
+    const day = date.getDate();
+    const month = date.getMonth() + 1;
+    const year = date.getFullYear();
+    const hours = date.getHours();
+    const minutes = date.getMinutes();
+    return `${day < 10 ? '0' + day : day}-${
+      month < 10 ? '0' + month : month
+    }-${year} / ${hours}h${minutes}`;
+  };
 
   return (
     <section className='card-section'>
-      {eventData.map((event) => (
-        <p key={event.id} className='event-descr'>
-          Venue : {event.venue.name}
-        </p>
-      ))}
+      {artistEvents &&
+        artistEvents.map((event) => (
+          <div
+            key={event.id}
+            className='event-card'
+            onClick={() => selectEvent(event)}
+          >
+            <p className='event-descr'>
+              {event.venue.name}
+              <p className='event-date'>{formatDate(event.datetime)}</p>
+            </p>
+          </div>
+        ))}
     </section>
   );
 };
