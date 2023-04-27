@@ -6,8 +6,9 @@ import Search from './components/Search';
 import Proposal from './components/Proposal';
 import { MapContainer, TileLayer, Marker } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
-import { Icon } from 'leaflet';
+import { Icon, divIcon } from 'leaflet';
 import vinyl from './img/vinyl.svg';
+import MarkerClusterGroup from 'react-leaflet-cluster';
 
 function App() {
   const [lat, setLat] = useState('45.71337');
@@ -81,6 +82,14 @@ function App() {
     iconSize: [38, 38],
   });
 
+  const createCustomClusterIcon = (cluster) => {
+    return new divIcon({
+      html: `<div class="cluster-icon">${cluster.getChildCount()}</div>`,
+      // className: 'custom-marker-cluster',
+      iconSize: [33, 33],
+    });
+  };
+
   return (
     <MapContainer center={[45.71337, 5.12919]} zoom={3}>
       <div className='container'>
@@ -95,9 +104,14 @@ function App() {
         </button>
         <Card artistEvents={artistEvents} selectEvent={handleSelectEvent} />
         <TileLayer url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png' />
-        {array?.map((marker) => (
-          <Marker position={marker.geocode} icon={customIcon}></Marker>
-        ))}
+        <MarkerClusterGroup
+          chunkedLoading
+          iconCreateFunction={createCustomClusterIcon}
+        >
+          {array?.map((marker) => (
+            <Marker position={marker.geocode} icon={customIcon}></Marker>
+          ))}
+        </MarkerClusterGroup>
         <div className='search-buttons-container'>
           <Search setSearchInput={setSearchInput} />
           <Proposal setSearchInput={setSearchInput} />
