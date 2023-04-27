@@ -19,8 +19,6 @@ function App() {
   const [array, setArray] = useState();
   const markerRef = useRef();
 
-  
-
   useEffect(() => {
     axios
       .get(
@@ -43,7 +41,6 @@ function App() {
         setArtistEvents(res.data);
       })
       .catch((err) => console.error(err.message));
-      
   }, [searchInput]);
 
   let markers = [];
@@ -108,7 +105,11 @@ function App() {
         >
           console artists states
         </button>
-        {/* <Card artistEvents={artistEvents} selectEvent={handleSelectEvent} /> */}
+        <Card
+          artistEvents={artistEvents}
+          artistInfos={artistInfos}
+          selectEvent={handleSelectEvent}
+        />
         <TileLayer url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png' />
         <MarkerClusterGroup
           chunkedLoading
@@ -117,8 +118,12 @@ function App() {
           {array?.map((marker, index) => (
             <Marker position={marker.geocode} icon={customIcon}>
               <Popup className='custom-popup'>
-              <Card artistEvent={artistEvents[index]} selectEvent={handleSelectEvent}/>
-            </Popup>
+                <Card
+                  artistEvent={artistEvents[index]}
+                  artistInfos={artistInfos}
+                  selectEvent={handleSelectEvent}
+                />
+              </Popup>
             </Marker>
           ))}
         </MarkerClusterGroup>
