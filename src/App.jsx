@@ -13,11 +13,11 @@ import MarkerClusterGroup from 'react-leaflet-cluster';
 function App() {
   const [lat, setLat] = useState('45.71337');
   const [lng, setLng] = useState('5.12919');
-  const [searchInput, setSearchInput] = useState('the weeknd');
+  const [searchInput, setSearchInput] = useState('');
   const [artistInfos, setArtistInfos] = useState(null);
   const [artistEvents, setArtistEvents] = useState(null);
   const [array, setArray] = useState();
-  const markerRef = useRef();
+  const [close, setClose] = useState(true);
 
   useEffect(() => {
     axios

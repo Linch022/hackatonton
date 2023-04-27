@@ -31,4 +31,15 @@
 .pas-concert {
   display: inline-block;
   z-index: 1000;
+  position: absolute;
+  top: 20%;
+  right: 32%;
+  border: 1px solid black;
+  border-radius: 10%;
+  height: 300px;
+  width: 500px;
+  text-align: center;
+  justify-content: center;
+  background-color: rgb(10, 32, 81);
+  color: white;
 }

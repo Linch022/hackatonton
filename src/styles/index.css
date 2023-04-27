@@ -24,7 +24,7 @@
   height: 3rem;
   width: 3rem;
   border-radius: 50%;
-  background: url('../img/vinyl.svg');
+  background: url("../img/vinyl.svg");
   background-repeat: no-repeat;
   background-size: cover;
   transform: translate(-25%, -25%);
@@ -36,6 +36,28 @@
   color: white;
 }
 
+.pas-concert {
+  display: inline-block;
+  z-index: 1000;
+  position: absolute;
+  top: 20%;
+  right: 32%;
+  border: 1px solid black;
+  border-radius: 10%;
+  height: 300px;
+  width: 500px;
+  text-align: center;
+  justify-content: center;
+  background-color: rgb(10, 32, 81);
+  color: white;
+}
+
+/*.event-descr {
+  background-color: #b18f74;
+  width: 100%;
+  padding: 10px;
+  border-radius: 10px;
+}*/
 .container-card {
   width: 250px;
   min-height: 300px;
@@ -89,19 +111,13 @@
   transform-style: preserve-3d;
   z-index: 0;
   text-overflow: ellipsis;
-  background: linear-gradient(
-    155deg,
-    transparent 0%,
-    rgba(134, 75, 4, 0.5) 20%,
-    rgba(175, 119, 73, 0.35) 70%,
-    transparent 100%
-  );
+  background: linear-gradient(155deg, transparent 0%, rgba(134, 75, 4, 0.5) 20%, rgba(175, 119, 73, 0.35) 70%, transparent 100%);
   display: flex;
   justify-content: center;
   align-items: center;
 }
 .card ::after {
-  content: '';
+  content: "";
   border-radius: 10px;
   position: absolute;
   top: 0;
@@ -110,46 +126,8 @@
   width: 100%;
   background: linear-gradient(155deg, #864b04 0%, #af7749 80%);
   opacity: 50%;
-  -webkit-mask: linear-gradient(
-      to left,
-      transparent calc(100% - 10px),
-      #fff calc(100% - 3px + 1px)
-    ),
-    linear-gradient(
-      to right,
-      transparent calc(100% - 10px),
-      #fff calc(100% - 3px + 1px)
-    ),
-    linear-gradient(
-      to bottom,
-      transparent calc(100% - 10px),
-      #fff calc(100% - 3px + 1px)
-    ),
-    linear-gradient(
-      to top,
-      transparent calc(100% - 10px),
-      #fff calc(100% - 3px + 1px)
-    );
-  mask: linear-gradient(
-      to left,
-      transparent calc(100% - 10px),
-      #fff calc(100% - 3px + 1px)
-    ),
-    linear-gradient(
-      to right,
-      transparent calc(100% - 10px),
-      #fff calc(100% - 3px + 1px)
-    ),
-    linear-gradient(
-      to bottom,
-      transparent calc(100% - 10px),
-      #fff calc(100% - 3px + 1px)
-    ),
-    linear-gradient(
-      to top,
-      transparent calc(100% - 10px),
-      #fff calc(100% - 3px + 1px)
-    );
+  -webkit-mask: linear-gradient(to left, transparent calc(100% - 10px), #fff calc(100% - 3px + 1px)), linear-gradient(to right, transparent calc(100% - 10px), #fff calc(100% - 3px + 1px)), linear-gradient(to bottom, transparent calc(100% - 10px), #fff calc(100% - 3px + 1px)), linear-gradient(to top, transparent calc(100% - 10px), #fff calc(100% - 3px + 1px));
+          mask: linear-gradient(to left, transparent calc(100% - 10px), #fff calc(100% - 3px + 1px)), linear-gradient(to right, transparent calc(100% - 10px), #fff calc(100% - 3px + 1px)), linear-gradient(to bottom, transparent calc(100% - 10px), #fff calc(100% - 3px + 1px)), linear-gradient(to top, transparent calc(100% - 10px), #fff calc(100% - 3px + 1px));
   background-color: border-box;
   background-clip: content-box;
 }
@@ -207,7 +185,7 @@
   position: absolute;
   top: 15%;
   left: 0;
-  content: '?';
+  content: "?";
   color: whitesmoke;
   width: 100%;
   height: 100%;
@@ -305,7 +283,6 @@
   flex-wrap: wrap;
   transition: 1s ease-in-out;
   justify-content: center;
-  justify-content: center;
 }
 .proposal-container .proposal-buttons .proposal-button {
   width: 200px;
@@ -323,9 +300,16 @@
   transform: translateY(100px);
   opacity: 1;
 }
-.card-section {
-  background-color: #b18f74;
-} /*# sourceMappingURL=index.css.map */
+
+.leaflet-popup-content-wrapper {
+  background-color: transparent !important;
+  box-shadow: none !important;
+}
+
+.leaflet-popup-tip {
+  background: transparent !important;
+  box-shadow: none !important;
+}
 
 .leaflet-container {
   height: 200vh;
@@ -335,7 +319,7 @@
   height: 3rem;
   width: 3rem;
   border-radius: 50%;
-  background: url('../img/vinyl.svg');
+  background: url("../img/vinyl.svg");
   background-repeat: no-repeat;
   background-size: cover;
   transform: translate(-25%, -25%);
@@ -348,15 +332,17 @@
 }
 
 .pas-concert {
-  position: absolute;
   display: inline-block;
   z-index: 1000;
-  top: 10%;
-  left: 30%;
-  height: 200px;
-  width: 500px;
+  position: absolute;
+  top: 20%;
+  right: 32%;
   border: 1px solid black;
+  border-radius: 10%;
+  height: 300px;
+  width: 500px;
   text-align: center;
-  background-color: rgb(32, 81, 124);
-  border-radius: 20px;
-}
+  justify-content: center;
+  background-color: rgb(10, 32, 81);
+  color: white;
+}/*# sourceMappingURL=index.css.map */
