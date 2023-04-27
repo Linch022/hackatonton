@@ -60,19 +60,7 @@ function App() {
   }, [artistEvents]);
   console.log(array);
 
-  const handleClickLat = () => {
-    for (let i = 0; i < artistEvents.length; i++) {
-      setLat(artistEvents[i].venue.latitude);
-    }
-  };
-
   console.log(artistEvents);
-
-  const handleClickLng = () => {
-    for (let i = 0; i < artistEvents.length; i++) {
-      setLng(artistEvents[i].venue.longitude);
-    }
-  };
 
   const [selectEvent, setSelectEvent] = useState(null);
   const handleSelectEvent = (event) => {
@@ -96,15 +84,6 @@ function App() {
   return (
     <MapContainer center={[45.71337, 5.12919]} zoom={3}>
       <div className='container'>
-        <button
-          type='button'
-          onClick={() => {
-            handleClickLat();
-            handleClickLng();
-          }}
-        >
-          console artists states
-        </button>
         {/* <Card artistEvents={artistEvents} selectEvent={handleSelectEvent} /> */}
         <TileLayer url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png' />
         <MarkerClusterGroup
