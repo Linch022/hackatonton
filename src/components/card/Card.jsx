@@ -28,7 +28,16 @@ const Card = ({ artistEvents, selectEvent }) => {
                 <p className='city-event'>{event.venue.city}</p>
                 <p className='event-date'>{formatDate(event.datetime)}</p>
               </div>
-              <div className='back-card'>{event.lineup}</div>
+              <div className='back-card'>
+                <ul className='lineup'>
+                  {event.lineup.map((name, index) => {
+                    if (index > 12) {
+                      return null;
+                    }
+                    return <li key={name}>{name}</li>;
+                  })}
+                </ul>
+              </div>
             </div>
           </div>
         ))}

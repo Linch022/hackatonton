@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import Mapquest from './components/Mapquest';
-import './styles/index.scss';
+import './styles/index.css';
 import axios from 'axios';
 import Card from './components/card/Card';
 import Search from './components/Search';
