@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Concert+One&display=swap");
 * {
   margin: 0;
   padding: 0;
@@ -6,7 +7,195 @@
   text-decoration: none;
 }
 
-/* h1 {
-  color: $ex-color;
-} */
-/*# sourceMappingURL=index.css.map */
+.leaflet-popup-content-wrapper {
+  background-color: transparent !important;
+  box-shadow: none !important;
+}
+
+.leaflet-popup-tip {
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.leaflet-container {
+  height: 200vh;
+}
+
+.cluster-icon {
+  height: 3rem;
+  width: 3rem;
+  border-radius: 50%;
+  background: url("../img/vinyl.svg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  transform: translate(-25%, -25%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 900;
+  font-size: 1.5rem;
+  color: white;
+}
+
+.container-card {
+  width: 250px;
+  min-height: 300px;
+  height: 100%;
+  perspective: 800px;
+}
+.container-card .front-card,
+.container-card .back-card {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  backface-visibility: hidden;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+.container-card .front-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+.container-card .front-card .artist-name {
+  margin-top: 20px;
+}
+.container-card .front-card .title-event {
+  width: 80%;
+  margin-top: 10px;
+  text-align: center;
+}
+.container-card .back-card {
+  height: auto;
+  transform: rotateY(180deg);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 300px;
+  padding: 20px 0;
+  overflow: hidden;
+}
+
+.container-card:hover > .card {
+  cursor: pointer;
+  transform: rotateY(180deg);
+}
+
+.card {
+  border-radius: 10px;
+  height: auto;
+  min-height: 300px;
+  width: 100%;
+  position: relative;
+  transition: transform 1500ms;
+  transform-style: preserve-3d;
+  z-index: 0;
+  text-overflow: ellipsis;
+  background: linear-gradient(155deg, transparent 0%, rgba(134, 75, 4, 0.5) 20%, rgba(175, 119, 73, 0.35) 70%, transparent 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.card ::after {
+  content: "";
+  border-radius: 10px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(155deg, #864b04 0%, #af7749 80%);
+  opacity: 50%;
+  -webkit-mask: linear-gradient(to left, transparent calc(100% - 10px), #fff calc(100% - 3px + 1px)), linear-gradient(to right, transparent calc(100% - 10px), #fff calc(100% - 3px + 1px)), linear-gradient(to bottom, transparent calc(100% - 10px), #fff calc(100% - 3px + 1px)), linear-gradient(to top, transparent calc(100% - 10px), #fff calc(100% - 3px + 1px));
+          mask: linear-gradient(to left, transparent calc(100% - 10px), #fff calc(100% - 3px + 1px)), linear-gradient(to right, transparent calc(100% - 10px), #fff calc(100% - 3px + 1px)), linear-gradient(to bottom, transparent calc(100% - 10px), #fff calc(100% - 3px + 1px)), linear-gradient(to top, transparent calc(100% - 10px), #fff calc(100% - 3px + 1px));
+  background-color: border-box;
+  background-clip: content-box;
+}
+
+.card-section {
+  background-color: #b18f74;
+  width: 100%;
+}
+
+.search-buttons-container {
+  font-family: "Concert One", cursive;
+  position: fixed;
+  top: 0;
+  z-index: 800;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  justify-content: center;
+}
+
+.search-box {
+  width: 350px;
+  height: 50px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  position: relative;
+  margin: 20px;
+  z-index: 950;
+}
+.search-box .validate {
+  height: 50px;
+  width: 50px;
+  position: absolute;
+  top: 0;
+  right: 2%;
+  background: transparent;
+  border: none;
+  z-index: 999;
+  font-family: "Concert One", cursive;
+  font-size: 1.5rem;
+}
+.search-box .search-bar {
+  height: 100%;
+  border-radius: 5px;
+  padding-left: 30px;
+  padding-right: 40px;
+  font-family: "Concert One", cursive;
+  font-size: 1.5rem;
+  border: 3.5px solid #000000;
+  outline: 0px solid transparent;
+  background: rgba(253, 253, 253, 0.65);
+  box-shadow: 3px -2px black, 3px -1px black;
+}
+.search-box .search-bar::-moz-placeholder {
+  color: #000000;
+}
+.search-box .search-bar::placeholder {
+  color: #000000;
+}
+
+.leaflet-popup-content-wrapper {
+  background-color: transparent !important;
+  box-shadow: none !important;
+}
+
+.leaflet-popup-tip {
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.leaflet-container {
+  height: 200vh;
+}
+
+.cluster-icon {
+  height: 3rem;
+  width: 3rem;
+  border-radius: 50%;
+  background: url("../img/vinyl.svg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  transform: translate(-25%, -25%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 900;
+  font-size: 1.5rem;
+  color: white;
+}/*# sourceMappingURL=index.css.map */
