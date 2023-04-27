@@ -1,17 +1,20 @@
 import React, { useState } from 'react';
 
-const Proposal = () => {
+const Proposal = ({ setSearchInput }) => {
   const [buttonClass, setButtonClass] = useState('hide');
 
   const handleClickProposal = (e) => {
     e.preventDefault();
     if (buttonClass === 'hide') {
-      console.log('coucou');
       setButtonClass('visible');
     } else {
-      console.log('pas coucou');
       setButtonClass('hide');
     }
+  };
+
+  const handleproposalButton = (e) => {
+    const { value } = e.target;
+    setSearchInput(value);
   };
   return (
     <div className='proposal-container'>
@@ -19,11 +22,41 @@ const Proposal = () => {
         Suggestion
       </button>
       <div className={`proposal-buttons ${buttonClass}`}>
-        <button className='proposal-button'>Coldplay</button>
-        <button className='proposal-button'>Metallica</button>
-        <button className='proposal-button'>Toto</button>
-        <button className='proposal-button'>Jul</button>
-        <button className='proposal-button'>Iggy Pop</button>
+        <button
+          className='proposal-button'
+          value='coldplay'
+          onClick={handleproposalButton}
+        >
+          Coldplay
+        </button>
+        <button
+          className='proposal-button'
+          value='metallica'
+          onClick={handleproposalButton}
+        >
+          Metallica
+        </button>
+        <button
+          className='proposal-button'
+          value='toto'
+          onClick={handleproposalButton}
+        >
+          Toto
+        </button>
+        <button
+          className='proposal-button'
+          value='jul'
+          onClick={handleproposalButton}
+        >
+          Jul
+        </button>
+        <button
+          className='proposal-button'
+          value='queen'
+          onClick={handleproposalButton}
+        >
+          Queen
+        </button>
       </div>
     </div>
   );

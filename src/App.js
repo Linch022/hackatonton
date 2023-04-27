@@ -1,20 +1,19 @@
-import { useState } from 'react';
-import Mapquest from './Components/Mapquest';
+import { useEffect, useState } from 'react';
+import Mapquest from './components/Mapquest';
 import './styles/index.css';
 import Search from './components/Search';
 import Proposal from './components/Proposal';
-import { func } from 'prop-types';
 import axios from 'axios';
 
 function App() {
   const [lat, setLat] = useState('45.71337');
   const [lng, setLng] = useState('5.12919');
 
-  const [searchInput, setSearchInput] = useState('the Weeknd');
+  const [searchInput, setSearchInput] = useState('');
   const [artistInfos, setArtistInfos] = useState(null);
   const [artistEvents, setArtistEvents] = useState(null);
 
-  const callAPIs = () => {
+  useEffect(() => {
     axios
       .get(
         `https://www.theaudiodb.com/api/v1/json/523532/search.php?s=${searchInput
@@ -36,23 +35,11 @@ function App() {
         setArtistEvents(res.data);
       })
       .catch((err) => console.error(err.message));
-  };
+    console.log(searchInput);
+  }, [searchInput]);
 
   return (
     <div className='container'>
-      <button type='button' onClick={callAPIs}>
-        callAPIS
-      </button>
-      <button
-        type='button'
-        onClick={() => {
-          console.info(artistInfos);
-          console.info(artistEvents);
-        }}
-      >
-        console artists states
-      </button>
-
       <Mapquest
         height='100vh'
         width='100vw'
@@ -62,8 +49,8 @@ function App() {
         apiKey='04fOmiVjdX1XrN84jFjaBqTNufknQw9k'
       />
       <div className='search-buttons-container'>
-        <Search />
-        <Proposal />
+        <Search setSearchInput={setSearchInput} />
+        <Proposal setSearchInput={setSearchInput} />
       </div>
     </div>
   );
