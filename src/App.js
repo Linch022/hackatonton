@@ -34,10 +34,10 @@ function App() {
       .catch((err) => console.error(err.message));
   };
 
-  let markers = [];
   console.log(artistEvents);
 
   useEffect(() => {
+    let markers = [];
     // const setCenter = (lat, lng) => {
     //   setLat(lat);
     //   setLng(lng);
