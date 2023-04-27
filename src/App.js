@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import Mapquest from './Components/Mapquest';
-import './styles/index.css';
+import './styles/index.scss';
 import axios from 'axios';
+import Card from './components/card/Card';
 
 function App() {
   const [lat, setLat] = useState('45.71337');
@@ -81,6 +82,13 @@ function App() {
     }
   };
 
+  const [selectEvent, setSelectEvent] = useState(null);
+  const handleSelectEvent = (event) => {
+    setSelectEvent(event);
+  };
+
+  console.log(selectEvent);
+
   const clearMarkers = () => {};
 
   return (
@@ -97,7 +105,7 @@ function App() {
       >
         console artists states
       </button>
-
+      <Card artistEvents={artistEvents} selectEvent={handleSelectEvent} />
       <Mapquest
         height='100vh'
         width='100vw'
