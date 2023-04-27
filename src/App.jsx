@@ -3,7 +3,6 @@ import './styles/index.css';
 import axios from 'axios';
 import Card from './components/card/Card';
 import Search from './components/Search';
-import Proposal from './components/Proposal';
 import { MapContainer, TileLayer, Marker } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import { Icon, divIcon } from 'leaflet';
@@ -80,6 +79,7 @@ function App() {
   const customIcon = new Icon({
     iconUrl: vinyl,
     iconSize: [38, 38],
+    className: 'anim-vinyl',
   });
 
   const createCustomClusterIcon = (cluster) => {
@@ -114,7 +114,6 @@ function App() {
         </MarkerClusterGroup>
         <div className='search-buttons-container'>
           <Search setSearchInput={setSearchInput} />
-          <Proposal setSearchInput={setSearchInput} />
         </div>
       </div>
     </MapContainer>

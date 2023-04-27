@@ -1,18 +1,6 @@
-import React, { useState } from 'react';
-import vinylSvg from '../img/vinyl.svg';
+import React from 'react';
 
 const Search = ({ setSearchInput }) => {
-  const [displayClass, setDisplayClass] = useState('close');
-
-  const handleClickSearch = (e) => {
-    e.preventDefault();
-    if (displayClass === 'close') {
-      setDisplayClass('open');
-    } else {
-      setDisplayClass('close');
-    }
-  };
-
   const handleSearchValue = () => {
     const input = document.getElementById('search-input');
     let { value } = input;
@@ -27,15 +15,10 @@ const Search = ({ setSearchInput }) => {
     <div className='search-box'>
       <input
         type='text'
-        className={`search-bar ${displayClass}`}
+        className={`search-bar`}
         id='search-input'
+        placeholder='Tape un artiste'
       />
-      <button
-        onClick={handleClickSearch}
-        className={`${displayClass}-button vinyl-button`}
-      >
-        <img src={vinylSvg} alt='' />
-      </button>
       <button className='validate' onClick={handleSearchValue}>
         OK
       </button>
