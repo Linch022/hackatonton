@@ -7,7 +7,7 @@ const Mapquest = ({ height, width, center, tileLayer, zoom, apiKey }) => {
     window.L.mapquest.key = apiKey;
 
     //Initialiser la map
-
+    
     const map = window.L.mapquest.map('map', {
       center,
       layers: window.L.mapquest.tileLayer(tileLayer),
@@ -20,11 +20,6 @@ const Mapquest = ({ height, width, center, tileLayer, zoom, apiKey }) => {
       })
     );
 
-    map.addLayer(
-      window.L.mapquest.geocodingLayer({
-        geocodingResponse: Card,
-      })
-    );
   }, []);
 
   return (

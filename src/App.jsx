@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import Mapquest from './components/Mapquest';
-import './styles/index.scss';
+import './styles/index.css';
 import axios from 'axios';
 import Card from './components/card/Card';
 import Search from './components/Search';
@@ -9,7 +9,7 @@ import Proposal from './components/Proposal';
 function App() {
   const [lat, setLat] = useState('45.71337');
   const [lng, setLng] = useState('5.12919');
-  const [searchInput, setSearchInput] = useState('');
+  const [searchInput, setSearchInput] = useState('the weeknd');
   const [artistInfos, setArtistInfos] = useState(null);
   const [artistEvents, setArtistEvents] = useState(null);
 
@@ -66,7 +66,7 @@ function App() {
           },
         })
         .addTo(window.L.mapquest.Map.getMap('map'));
-
+        console.info(window.L.mapquest.Map.getMap('map').project(window.L.latLng(lat, lng)));
       markers.push(marker);
     };
     if (artistEvents) {
