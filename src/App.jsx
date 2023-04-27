@@ -85,37 +85,37 @@ function App() {
   const createCustomClusterIcon = (cluster) => {
     return new divIcon({
       html: `<div class="cluster-icon">${cluster.getChildCount()}</div>`,
-      // className: 'custom-marker-cluster',
+
       iconSize: [33, 33],
     });
   };
 
   return (
-    <MapContainer center={[45.71337, 5.12919]} zoom={3}>
-      <div className='container'>
-        <button
-          type='button'
-          onClick={() => {
-            handleClickLat();
-            handleClickLng();
-          }}
-        >
-          console artists states
-        </button>
-        <Card artistEvents={artistEvents} selectEvent={handleSelectEvent} />
-        <TileLayer url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png' />
-        <MarkerClusterGroup
-          chunkedLoading
-          iconCreateFunction={createCustomClusterIcon}
-        >
-          {array?.map((marker) => (
-            <Marker position={marker.geocode} icon={customIcon}></Marker>
-          ))}
-        </MarkerClusterGroup>
-        <div className='search-buttons-container'>
-          <Search setSearchInput={setSearchInput} />
-          <Proposal setSearchInput={setSearchInput} />
+    <MapContainer
+      center={[-30, 30]}
+      zoom={3}
+      minZoom={3}
+      // maxBounds={bounds}
+      // maxBoundsViscosity={'0.5'}
+    >
+      {artistEvents && artistEvents.length === 0 && (
+        <div className='pas-concert'>
+          <p>Déso pélo</p>
         </div>
+      )}
+      {/* <Card artistEvents={artistEvents} selectEvent={handleSelectEvent} /> */}
+      <TileLayer url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png' />
+      <MarkerClusterGroup
+        chunkedLoading
+        iconCreateFunction={createCustomClusterIcon}
+      >
+        {array?.map((marker) => (
+          <Marker position={marker.geocode} icon={customIcon}></Marker>
+        ))}
+      </MarkerClusterGroup>
+      <div className='search-buttons-container'>
+        <Search setSearchInput={setSearchInput} />
+        <Proposal setSearchInput={setSearchInput} />
       </div>
     </MapContainer>
   );

@@ -6,6 +6,13 @@
   text-decoration: none;
 }
 
+.event-descr {
+  background-color: #b18f74;
+  width: 20vw;
+  padding: 10px;
+  border-radius: 10px;
+}
+
 .search-buttons-container {
   position: fixed;
   top: 0;
@@ -54,7 +61,7 @@
   position: absolute;
   top: 15%;
   left: 0;
-  content: '?';
+  content: "?";
   color: whitesmoke;
   width: 100%;
   height: 100%;
@@ -151,6 +158,7 @@
   flex-direction: row;
   flex-wrap: wrap;
   transition: 1s ease-in-out;
+  justify-content: center;
 }
 .proposal-container .proposal-buttons .proposal-button {
   width: 200px;
@@ -168,9 +176,6 @@
   transform: translateY(100px);
   opacity: 1;
 }
-.card-section {
-  background-color: #b18f74;
-} /*# sourceMappingURL=index.css.map */
 
 .leaflet-container {
   height: 200vh;
@@ -180,7 +185,7 @@
   height: 3rem;
   width: 3rem;
   border-radius: 50%;
-  background: url('../img/vinyl.svg');
+  background: url("../img/vinyl.svg");
   background-repeat: no-repeat;
   background-size: cover;
   transform: translate(-25%, -25%);
@@ -191,3 +196,8 @@
   font-size: 1.5rem;
   color: white;
 }
+
+.pas-concert {
+  display: inline-block;
+  z-index: 1000;
+}/*# sourceMappingURL=index.css.map */
