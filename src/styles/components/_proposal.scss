@@ -1,0 +1,40 @@
+.proposal-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .open-proposal {
+    display: inline-block;
+    z-index: 3;
+    width: 300px;
+    height: 50px;
+    border-radius: 50px;
+    border: 4.5px solid #b18f74;
+    background: rgb(177 143 116);
+  }
+
+  .proposal-buttons {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    transition: 1s ease-in-out;
+
+    .proposal-button {
+      width: 200px;
+      height: 40px;
+      margin: 10px;
+      border-radius: 50px;
+      border: 4.5px solid #b18f74;
+      background: rgb(177 143 116);
+    }
+  }
+  .hide {
+    opacity: 0;
+    transform: translateY(-50px);
+  }
+  .visible {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}

@@ -3,6 +3,7 @@ import vinylSvg from '../img/vinyl.svg';
 
 const Search = () => {
   const [displayClass, setDisplayClass] = useState('close');
+
   const handleClickSearch = (e) => {
     e.preventDefault();
     if (displayClass === 'close') {

@@ -1,10 +1,24 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 const Proposal = () => {
+  const [buttonClass, setButtonClass] = useState('hide');
+
+  const handleClickProposal = (e) => {
+    e.preventDefault();
+    if (buttonClass === 'hide') {
+      console.log('coucou');
+      setButtonClass('visible');
+    } else {
+      console.log('pas coucou');
+      setButtonClass('hide');
+    }
+  };
   return (
     <div className='proposal-container'>
-      <button className='open-proposal'>Suggestion</button>
-      <div>
+      <button onClick={handleClickProposal} className='open-proposal'>
+        Suggestion
+      </button>
+      <div className={`proposal-buttons ${buttonClass}`}>
         <button className='proposal-button'>Coldplay</button>
         <button className='proposal-button'>Metallica</button>
         <button className='proposal-button'>Toto</button>
