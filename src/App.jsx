@@ -100,9 +100,6 @@ function App() {
 
   return (
     <div className='container'>
-      <button type='button' onClick={callAPIs}>
-        callAPIS
-      </button>
       <button
         type='button'
         onClick={() => {

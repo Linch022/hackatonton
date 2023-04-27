@@ -6,7 +6,6 @@
   text-decoration: none;
 }
 
-<<<<<<< HEAD
 .search-buttons-container {
   position: fixed;
   top: 0;
@@ -55,7 +54,7 @@
   position: absolute;
   top: 15%;
   left: 0;
-  content: "?";
+  content: '?';
   color: whitesmoke;
   width: 100%;
   height: 100%;
@@ -168,8 +167,7 @@
 .proposal-container .visible {
   transform: translateY(100px);
   opacity: 1;
-=======
+}
 .card-section {
   background-color: #b18f74;
->>>>>>> e56e07b1173bbfb8141bdc9a3d20752bc245c5c3
-}/*# sourceMappingURL=index.css.map */
+} /*# sourceMappingURL=index.css.map */
