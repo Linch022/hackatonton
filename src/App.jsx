@@ -85,8 +85,7 @@ function App() {
           <h1>{`Désolé ${searchInput} n'a pas de concerts prévus bientôt`}</h1>
         </div>
       )}
-      {/* {/* <Card artistEvents={artistEvents} selectEvent={handleSelectEvent} /> */}{' '}
-      */}
+
       <TileLayer url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png' />
       <MarkerClusterGroup
         chunkedLoading
