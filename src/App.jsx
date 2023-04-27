@@ -1,10 +1,10 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import './styles/index.css';
 import axios from 'axios';
 import Card from './components/card/Card';
 import Search from './components/Search';
 import Proposal from './components/Proposal';
-import { MapContainer, TileLayer, Marker } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import { Icon, divIcon } from 'leaflet';
 import vinyl from './img/vinyl.svg';
@@ -13,10 +13,13 @@ import MarkerClusterGroup from 'react-leaflet-cluster';
 function App() {
   const [lat, setLat] = useState('45.71337');
   const [lng, setLng] = useState('5.12919');
-  const [searchInput, setSearchInput] = useState('');
+  const [searchInput, setSearchInput] = useState('the weeknd');
   const [artistInfos, setArtistInfos] = useState(null);
   const [artistEvents, setArtistEvents] = useState(null);
   const [array, setArray] = useState();
+  const markerRef = useRef();
+
+  
 
   useEffect(() => {
     axios
@@ -40,6 +43,7 @@ function App() {
         setArtistEvents(res.data);
       })
       .catch((err) => console.error(err.message));
+      
   }, [searchInput]);
 
   let markers = [];
@@ -104,14 +108,18 @@ function App() {
         >
           console artists states
         </button>
-        <Card artistEvents={artistEvents} selectEvent={handleSelectEvent} />
+        {/* <Card artistEvents={artistEvents} selectEvent={handleSelectEvent} /> */}
         <TileLayer url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png' />
         <MarkerClusterGroup
           chunkedLoading
           iconCreateFunction={createCustomClusterIcon}
         >
-          {array?.map((marker) => (
-            <Marker position={marker.geocode} icon={customIcon}></Marker>
+          {array?.map((marker, index) => (
+            <Marker position={marker.geocode} icon={customIcon}>
+              <Popup className='custom-popup'>
+              <Card artistEvent={artistEvents[index]} selectEvent={handleSelectEvent}/>
+            </Popup>
+            </Marker>
           ))}
         </MarkerClusterGroup>
         <div className='search-buttons-container'>
