@@ -66,6 +66,8 @@ function App() {
     }
   };
 
+  console.log(artistEvents);
+
   const handleClickLng = () => {
     for (let i = 0; i < artistEvents.length; i++) {
       setLng(artistEvents[i].venue.longitude);
