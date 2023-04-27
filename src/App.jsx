@@ -1,18 +1,15 @@
-import { useState } from 'react';
-import Mapquest from './components/Mapquest';
-import Card from './components/card/Card';
+import { useState, useEffect } from 'react';
+import Mapquest from './components/card/Mapquest';
 import './styles/index.scss';
-import { func } from 'prop-types';
 import axios from 'axios';
+import Card from './components/card/Card';
 
 function App() {
   const [lat, setLat] = useState('45.71337');
   const [lng, setLng] = useState('5.12919');
-
-  const [searchInput, setSearchInput] = useState('the Weeknd');
+  const [searchInput, setSearchInput] = useState('Gojira');
   const [artistInfos, setArtistInfos] = useState(null);
   const [artistEvents, setArtistEvents] = useState(null);
-  const [selectEvent, setSelectEvent] = useState(null);
 
   const callAPIs = () => {
     axios
@@ -38,11 +35,61 @@ function App() {
       .catch((err) => console.error(err.message));
   };
 
-  const handleSelestEvent = (event) => {
+  console.log(artistEvents);
+
+  useEffect(() => {
+    let markers = [];
+    // const setCenter = (lat, lng) => {
+    //   setLat(lat);
+    //   setLng(lng);
+
+    //   window.L.mapquest.Map.getMap('map').setView(
+    //     new window.L.LatLng(lat, lng),
+    //     5
+    //   );
+    // };
+
+    const addMarker = (lat, lng, title, subTitle) => {
+      const marker = window.L.mapquest
+        .textMarker(new window.L.LatLng(lat, lng), {
+          text: title || '',
+          subtext: subTitle || '',
+          position: 'right',
+          type: 'marker',
+          icon: {
+            primaryColor: '#a8190f',
+            secondaryColor: '#db2c2c',
+            size: 'md',
+          },
+        })
+        .addTo(window.L.mapquest.Map.getMap('map'));
+
+      markers.push(marker);
+    };
+    addMarker(lat, lng);
+    // setCenter(lat, lng);
+  }, [lat, lng]);
+
+  const handleClickLat = () => {
+    for (let i = 0; i < artistEvents.length; i++) {
+      setLat(artistEvents[i].venue.latitude);
+    }
+  };
+
+  const handleClickLng = () => {
+    for (let i = 0; i < artistEvents.length; i++) {
+      setLng(artistEvents[i].venue.longitude);
+    }
+  };
+
+  const [selectEvent, setSelectEvent] = useState(null);
+  const handleSelectEvent = (event) => {
     setSelectEvent(event);
   };
 
   console.log(selectEvent);
+
+  const clearMarkers = () => {};
 
   return (
     <div className='container'>
@@ -52,15 +99,13 @@ function App() {
       <button
         type='button'
         onClick={() => {
-          console.info(artistInfos);
-          console.info(artistEvents);
+          handleClickLat();
+          handleClickLng();
         }}
       >
         console artists states
       </button>
-
-      <Card artistEvents={artistEvents} selectEvent={handleSelestEvent} />
-
+      <Card artistEvents={artistEvents} selectEvent={handleSelectEvent} />
       <Mapquest
         height='100vh'
         width='100vw'
