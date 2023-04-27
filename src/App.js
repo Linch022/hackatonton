@@ -1,7 +1,23 @@
 import './App.css';
+import { useState } from 'react';
+import Mapquest from './Components/Mapquest';
 
 function App() {
-  return <div className='App'></div>;
+  const [lat, setLat] = useState('45.71337');
+  const [lng, setLng] = useState('5.12919');
+
+  return (
+    <div className='container'>
+      <Mapquest
+        height='100vh'
+        width='100vh'
+        center={[lat, lng]}
+        tileLayer={'dark'}
+        zoom={12}
+        apiKey='04fOmiVjdX1XrN84jFjaBqTNufknQw9k'
+      />
+    </div>
+  );
 }
 
 export default App;
