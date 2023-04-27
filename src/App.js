@@ -1,6 +1,6 @@
-import './App.css';
 import { useState } from 'react';
 import Mapquest from './Components/Mapquest';
+import './styles/index.css';
 
 function App() {
   const [lat, setLat] = useState('45.71337');
@@ -10,10 +10,10 @@ function App() {
     <div className='container'>
       <Mapquest
         height='100vh'
-        width='100vh'
+        width='100vw'
         center={[lat, lng]}
-        tileLayer={'dark'}
-        zoom={12}
+        tileLayer={'map'}
+        zoom={3}
         apiKey='04fOmiVjdX1XrN84jFjaBqTNufknQw9k'
       />
     </div>

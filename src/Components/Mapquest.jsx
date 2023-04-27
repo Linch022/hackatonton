@@ -7,13 +7,17 @@ const Mapquest = ({ height, width, center, tileLayer, zoom, apiKey }) => {
 
     //Initialiser la map
 
-    const map = L.mapquest.map('map', {
+    const map = window.L.mapquest.map('map', {
       center,
       layers: window.L.mapquest.tileLayer(tileLayer),
       zoom,
     });
 
-    map.addControl(window.L.mapquest.control());
+    map.addControl(
+      window.L.mapquest.geocodingControl({
+        position: 'topright',
+      })
+    );
   }, []);
 
   return (
