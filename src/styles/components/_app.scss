@@ -1,11 +1,11 @@
 .leaflet-popup-content-wrapper {
-  background-color: #b18f74 !important;
-  box-shadow: #b18f74 !important;
-  transform: translateY(160px)
+  background-color: transparent!important;
+  box-shadow: none !important;
 }
 
 .leaflet-popup-tip {
   background: transparent !important;
+  box-shadow: none !important;
 }
 
 .leaflet-container {
