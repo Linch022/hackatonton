@@ -6,6 +6,14 @@
   text-decoration: none;
 }
 
+.container {
+  height: 100vh;
+}
+
+.custom-popup {
+  opacity: 0.5;
+}
+
 .event-descr {
   background-color: #b18f74;
   width: 20vw;
@@ -158,6 +166,7 @@
   flex-direction: row;
   flex-wrap: wrap;
   transition: 1s ease-in-out;
+  justify-content: center;
 }
 .proposal-container .proposal-buttons .proposal-button {
   width: 200px;
@@ -174,11 +183,4 @@
 .proposal-container .visible {
   transform: translateY(100px);
   opacity: 1;
-}
-.card-section {
-  background-color: #b18f74;
-} /*# sourceMappingURL=index.css.map */
-
-.leaflet-container {
-  height: 200vh;
-}
+}/*# sourceMappingURL=index.css.map */

@@ -1,10 +1,10 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import './styles/index.css';
 import axios from 'axios';
 import Card from './components/card/Card';
 import Search from './components/Search';
 import Proposal from './components/Proposal';
-import { MapContainer, TileLayer, Marker } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import { Icon } from 'leaflet';
 import vinyl from './img/vinyl.svg';
@@ -16,6 +16,9 @@ function App() {
   const [artistInfos, setArtistInfos] = useState(null);
   const [artistEvents, setArtistEvents] = useState(null);
   const [array, setArray] = useState();
+  const markerRef = useRef();
+
+  
 
   useEffect(() => {
     axios
@@ -39,6 +42,7 @@ function App() {
         setArtistEvents(res.data);
       })
       .catch((err) => console.error(err.message));
+      
   }, [searchInput]);
 
   let markers = [];
@@ -93,10 +97,14 @@ function App() {
         >
           console artists states
         </button>
-        <Card artistEvents={artistEvents} selectEvent={handleSelectEvent} />
+        {/* <Card artistEvents={artistEvents} selectEvent={handleSelectEvent} /> */}
         <TileLayer url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png' />
-        {array?.map((marker) => (
-          <Marker position={marker.geocode} icon={customIcon}></Marker>
+        {array?.map((marker, index) => (
+          <Marker position={marker.geocode} icon={customIcon}>
+            <Popup className='custom-popup'>
+              <Card artistEvent={artistEvents[index]} selectEvent={handleSelectEvent}/>
+            </Popup>
+          </Marker>
         ))}
         <div className='search-buttons-container'>
           <Search setSearchInput={setSearchInput} />

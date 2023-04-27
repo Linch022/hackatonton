@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Card = ({ artistEvents, selectEvent }) => {
+const Card = ({ artistEvent, selectEvent,  }) => {
   const formatDate = (datetime) => {
     const date = new Date(datetime);
     const day = date.getDate();
@@ -15,19 +15,18 @@ const Card = ({ artistEvents, selectEvent }) => {
 
   return (
     <section className='card-section'>
-      {artistEvents &&
-        artistEvents.map((event) => (
+
           <div
-            key={event.id}
+            key={artistEvent.id}
             className='event-card'
-            onClick={() => selectEvent(event)}
+            onClick={() => selectEvent(artistEvent)}
           >
             <p className='event-descr'>
-              {event.venue.name}
-              <p className='event-date'>{formatDate(event.datetime)}</p>
+              {artistEvent.venue.name}
+              <p className='event-date'>{formatDate(artistEvent.datetime)}</p>
             </p>
           </div>
-        ))}
+        
     </section>
   );
 };
