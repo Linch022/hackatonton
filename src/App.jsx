@@ -1,8 +1,4 @@
 import { useState, useEffect } from 'react';
-<<<<<<< HEAD
-import Mapquest from './components/Mapquest';
-=======
->>>>>>> dev
 import './styles/index.css';
 import axios from 'axios';
 import Card from './components/card/Card';
@@ -71,39 +67,6 @@ function App() {
   };
 
   console.log(artistEvents);
-
-  useEffect(() => {
-    let markers = [];
-    // const setCenter = (lat, lng) => {
-    //   setLat(lat);
-    //   setLng(lng);
-
-    //   window.L.mapquest.Map.getMap('map').setView(
-    //     new window.L.LatLng(lat, lng),
-    //     5
-    //   );
-    // };
-
-    const addMarker = (lat, lng, title, subTitle) => {
-      const marker = window.L.mapquest
-        .textMarker(new window.L.LatLng(lat, lng), {
-          text: title || '',
-          subtext: subTitle || '',
-          position: 'right',
-          type: 'marker',
-          icon: {
-            primaryColor: '#a8190f',
-            secondaryColor: '#db2c2c',
-            size: 'md',
-          },
-        })
-        .addTo(window.L.mapquest.Map.getMap('map'));
-
-      markers.push(marker);
-    };
-    addMarker(lat, lng);
-    // setCenter(lat, lng);
-  }, [lat, lng]);
 
   const handleClickLng = () => {
     for (let i = 0; i < artistEvents.length; i++) {
