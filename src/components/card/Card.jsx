@@ -10,7 +10,7 @@ const Card = ({ artistEvents, selectEvent }) => {
     const minutes = date.getMinutes();
     return `${day < 10 ? '0' + day : day}-${
       month < 10 ? '0' + month : month
-    }-${year} / ${hours}h${minutes}`;
+    }-${year} / ${hours}h${String(minutes).padStart(2, '0')}`;
   };
 
   return (
@@ -19,13 +19,17 @@ const Card = ({ artistEvents, selectEvent }) => {
         artistEvents.map((event) => (
           <div
             key={event.id}
-            className='event-card'
+            className='container-card'
             onClick={() => selectEvent(event)}
           >
-            <p className='event-descr'>
-              {event.venue.name}
-              <p className='event-date'>{formatDate(event.datetime)}</p>
-            </p>
+            <div className='card'>
+              <div className='front-card'>
+                <h3 className='title-event'>{event.venue.name}</h3>
+                <p className='city-event'>{event.venue.city}</p>
+                <p className='event-date'>{formatDate(event.datetime)}</p>
+              </div>
+              <div className='back-card'>{event.lineup}</div>
+            </div>
           </div>
         ))}
     </section>
