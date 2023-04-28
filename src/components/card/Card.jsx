@@ -18,11 +18,14 @@ const Card = ({ artistEvent, artistInfos, selectEvent, artist }) => {
     }-${year} / ${hours}h${String(minutes).padStart(2, '0')}`;
   };
 
-  const [showArtistInfo, setShowArtistInfo] = useState(false);
+  const [openInfos, setOpenInfos] = useState('');
 
   const handleClickShowArtist = () => {
-    setShowArtistInfo(!showArtistInfo);
-    console.log('do Something on Click');
+    if (openInfos === '' || openInfos === 'close') {
+      setOpenInfos('open');
+    } else {
+      setOpenInfos('close');
+    }
   };
 
   // const id = artistInfos[0].idArtist;
@@ -72,10 +75,14 @@ const Card = ({ artistEvent, artistInfos, selectEvent, artist }) => {
                   }
                 })}
               </ul>
+              <div className={`artist-info ${openInfos}`}>
+                <p className='artist-descr'>
+                  {artistInfos && artistInfos[0].strBiographyFR}
+                </p>
+              </div>
               <li className='url-ticket'>
                 <a href={artistEvent.url}>Acheter mon ticket</a>
               </li>
-              {/* {artistInfos && <Video id={artistInfos[0].idArtist} />} */}
               <ul className='social-container'>
                 {spotifyUrl ? (
                   <li className='social-media'>
