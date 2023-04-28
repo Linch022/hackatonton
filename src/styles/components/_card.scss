@@ -1,110 +1,203 @@
+.card-section {
+  width: 100%;
+  height: 400px;
+  position: relative;
+  font-family: 'Concert One', cursive;
+  font-size: 0.8rem;
+  color: #000000;
+}
 .container-card {
-  width: 250px;
-  min-height: 300px;
+  width: 300px;
   height: 100%;
-  perspective: 800px;
-
-  .front-card,
-  .back-card {
+  .card {
+    border-radius: 10px;
     height: 100%;
+    min-height: 300px;
     width: 100%;
-    position: absolute;
-    backface-visibility: hidden;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-  }
-
-  .front-card {
+    backdrop-filter: blur(4px);
+    position: relative;
+    z-index: 0;
     display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-
-    .artist-name {
-      margin-top: 20px;
-    }
-
-    .title-event {
-      width: 80%;
-      margin-top: 10px;
-      text-align: center;
-    }
-  }
-
-  .back-card {
-    height: auto;
-    transform: rotateY(180deg);
-    display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
-    min-height: 300px;
-    padding: 20px 0;
-    overflow: hidden;
+    border-radius: 5px;
+    border: 3.5px solid #000000;
+    outline: 0px solid transparent;
+    background: rgb(253 253 253 / 18%);
+    box-shadow: 1px -2px black, 2px 0px black, 3px -3px black;
   }
-}
-
-.container-card:hover > .card {
-  cursor: pointer;
-  transform: rotateY(180deg);
-}
-
-.card {
-  border-radius: 10px;
-  height: auto;
-  min-height: 300px;
-  width: 100%;
-  position: relative;
-  transition: transform 1500ms;
-  transform-style: preserve-3d;
-  z-index: 0;
-  text-overflow: ellipsis;
-  background: linear-gradient(
-    155deg,
-    transparent 0%,
-    rgba(134, 75, 4, 0.5) 20%,
-    rgba(175, 119, 73, 0.35) 70%,
-    transparent 100%
-  );
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  ::after {
-    content: '';
-    border-radius: 10px;
-    position: absolute;
-    top: 0;
-    left: 0;
+  .front-card {
     height: 100%;
     width: 100%;
-    background: linear-gradient(155deg, #864b04 0%, #af7749 80%);
-    opacity: 50%;
-    mask: linear-gradient(
-        to left,
-        transparent calc(100% - 10px),
-        #fff calc(100% - 3px + 1px)
-      ),
-      linear-gradient(
-        to right,
-        transparent calc(100% - 10px),
-        #fff calc(100% - 3px + 1px)
-      ),
-      linear-gradient(
-        to bottom,
-        transparent calc(100% - 10px),
-        #fff calc(100% - 3px + 1px)
-      ),
-      linear-gradient(
-        to top,
-        transparent calc(100% - 10px),
-        #fff calc(100% - 3px + 1px)
-      );
-    background-color: border-box;
-    background-clip: content-box;
+    padding: 10px;
+    position: absolute;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+
+    .event-date {
+      font-weight: 600;
+      font-size: 1rem;
+    }
+    .artist-name {
+      font-weight: 600;
+      font-size: 1rem;
+    }
+
+    .title-city-event {
+      text-align: center;
+      font-weight: 600;
+      font-size: 0.8rem;
+    }
+    .url-ticket {
+      border-radius: 5px;
+      border: 3.5px solid #000000;
+      outline: 0px solid transparent;
+      background: rgb(253, 253, 253);
+      padding: 5px;
+      box-shadow: 1px -2px black, 2px 0px black, 3px -3px black;
+      a {
+        color: black;
+        font-weight: 600;
+      }
+    }
+    .other-artist {
+      display: flex;
+      width: 80%;
+      flex-direction: row;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      font-weight: 600;
+      font-size: 0.8rem;
+      li:not(:last-child) {
+        border: 1px solid black;
+        margin: 2px;
+        padding: 2px;
+      }
+      &:hover {
+        cursor: pointer;
+      }
+    }
+    .social-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 40px;
+      .social-media {
+        margin: 10px;
+        height: 30px;
+        width: 30px;
+        img {
+          height: 30px;
+        }
+      }
+    }
+    .video-cont {
+      height: 155px;
+    }
+    p {
+      margin: 0 !important;
+    }
+    .social-media {
+      height: 20px;
+      width: 20px;
+    }
+    .facebook-icn {
+      color: blue;
+    }
+    iframe {
+      border-radius: 5px;
+    }
+  }
+
+  .artist-name:hover {
+    cursor: pointer;
+  }
+
+  .artist-info {
+    position: absolute;
+    top: 0;
+    right: -28px;
+    height: auto;
+    width: 400px;
+    padding: 10px;
+    transform: translateX(0%);
+    opacity: 0;
+    z-index: -1;
+    height: 395px;
+    border-radius: 5px;
+    border: 3.5px solid #000000;
+    outline: 0px solid transparent;
+    background: rgb(253 253 253 / 18%);
+    box-shadow: 1px -2px black, 2px 0px black, 3px -3px black;
+    backdrop-filter: blur(4px);
+    text-align: justify;
+
+    iframe {
+      height: 200px;
+      border-radius: 5px;
+    }
+    .artist-descr {
+      height: auto;
+      max-height: 130px;
+      margin-bottom: 20px;
+      overflow: scroll;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      p {
+        margin: 0 !important;
+      }
+    }
+    .artist-descr::-webkit-scrollbar {
+      display: none;
+    }
+  }
+  .open {
+    animation: card-open 2s ease;
+    animation-fill-mode: forwards;
+  }
+  .close {
+    animation: card-close 2s ease;
+    animation-fill-mode: forwards;
   }
 }
 
-.card-section {
-  background-color: #b18f74;
-  width: 100%;
+@keyframes card-open {
+  0% {
+    transform: translateX(0%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(100%);
+    opacity: 1;
+  }
+}
+@keyframes card-close {
+  0% {
+    transform: translateX(100%);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(0%);
+    opacity: 0;
+  }
+}
+.card-video {
+  width: 100% !important;
+  height: auto !important;
+  border-radius: 5px;
+}
+
+@media screen and (max-width: 600px) {
+  .card-section {
+    .container-card {
+      .artist-info {
+        width: 300px;
+        top: 105%;
+        right: 100%;
+      }
+    }
+  }
 }
