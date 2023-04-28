@@ -1,4 +1,4 @@
-import React from 'react';
+import { useState } from 'react';
 import Video from './Video';
 import youtbe from '../../img/youtube.svg';
 import spotify from '../../img/spotify.svg';
@@ -18,7 +18,10 @@ const Card = ({ artistEvent, artistInfos, selectEvent, artist }) => {
     }-${year} / ${hours}h${String(minutes).padStart(2, '0')}`;
   };
 
+  const [showArtistInfo, setShowArtistInfo] = useState(false);
+
   const handleClickShowArtist = () => {
+    setShowArtistInfo(!showArtistInfo);
     console.log('do Something on Click');
   };
 
@@ -103,7 +106,9 @@ const Card = ({ artistEvent, artistInfos, selectEvent, artist }) => {
                   </li>
                 ) : null}
               </ul>
-              <li className='video-cont'>ok</li>
+              <li className='video-cont'>
+                <Video id={artistEvent.id} />
+              </li>
             </ul>
           </div>
         </div>
