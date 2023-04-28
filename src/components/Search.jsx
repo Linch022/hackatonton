@@ -14,7 +14,7 @@ const Search = ({ setSearchInput }) => {
   return (
     <div className='search-box'>
       <input
-        type='search'
+        type='text'
         className={`search-bar`}
         id='search-input'
         placeholder='Tape un artiste'
