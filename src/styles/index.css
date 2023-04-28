@@ -139,11 +139,14 @@
 .container-card .front-card .facebook-icn {
   color: blue;
 }
+.container-card .front-card iframe {
+  border-radius: 5px;
+}
 
 .card-video {
   width: 100% !important;
   height: auto !important;
-  margin-top: 40px;
+  border-radius: 5px;
 }
 
 .search-buttons-container {

@@ -107,7 +107,7 @@ const Card = ({ artistEvent, artistInfos, selectEvent, artist }) => {
                 ) : null}
               </ul>
               <li className='video-cont'>
-                <Video id={artistEvent.id} />
+                <Video id={artistInfos[0].idArtist} />
               </li>
             </ul>
           </div>

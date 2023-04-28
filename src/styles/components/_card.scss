@@ -98,13 +98,16 @@
     .facebook-icn {
       color: blue;
     }
+    iframe {
+      border-radius: 5px;
+    }
   }
 }
 
 .card-video {
   width: 100% !important;
   height: auto !important;
-  margin-top: 40px;
+  border-radius: 5px;
 }
 
 // .container-card {
