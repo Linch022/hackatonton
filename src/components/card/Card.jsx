@@ -17,71 +17,82 @@ const Card = ({ artistEvent, artistInfos, selectEvent, artist }) => {
     }-${year} / ${hours}h${String(minutes).padStart(2, '0')}`;
   };
 
-  const [showArtistInfo, setShowArtistInfo] = useState(false);
+  const [openInfos, setOpenInfos] = useState('');
 
   const handleClickShowArtist = () => {
-    setShowArtistInfo(!showArtistInfo);
-    console.log('do Something on Click');
+    if (openInfos === '' || openInfos === 'close') {
+      setOpenInfos('open');
+    } else {
+      setOpenInfos('close');
+    }
   };
 
   // const id = artistInfos[0].idArtist;
-  console.log('akekoukoukou', artistInfos);
-  console.log(artist?.links.includes('youtube'));
+  console.log('akekoukou', artistInfos);
+  // console.log(artist?.links.includes('youtube'));
   return (
-    <section className='card-section'>
-      {artistEvent && (
-        <div
-          key={artistEvent.id}
-          className='container-card'
-          onClick={() => selectEvent(artistEvent)}
-        >
-          <div className='card'>
-            <ul className='front-card'>
-              <li className='event-date'>{formatDate(artistEvent.datetime)}</li>
-              <li className='artist-name'>
-                {artistInfos && artistInfos[0].strArtist}
-              </li>
-              <li className='artist-music-genre'>
-                {artistInfos && artistInfos[0].strGenre}
-              </li>
-              <li className='title-event'>{artistEvent.venue.name}</li>
-              <li className='city-event'>{artistEvent.venue.city}</li>
-              <li className='url-ticket'>
-                <a href={artistEvent.url}>Acheter mon ticket</a>
-              </li>
-              {artistEvent.lineup.map((name, index) => {
-                if (index === 3) {
-                  return <li>Et d'autres...</li>;
-                } else if (index >= 4) {
-                  return null;
-                }
-                return (
-                  <li key={name} onClick={() => handleClickShowArtist()}>
-                    {name}
-                  </li>
-                );
-              })}
-              {showArtistInfo && (
-                <div className='artist-info'>
-                  {artistInfos && artistInfos[0].strBiographyFR}
-                </div>
-              )}
-
-              {artistInfos && <Video id={artistInfos[0].idArtist} />}
-              <ul>
-                <li className='social-media'>
-                  {/* <a href={artistEvent.artist.links.includes('spotify').url}>
-                    <img src={spotify} alt='' />
-                  </a> */}
+    <>
+      <section className='card-section'>
+        {artistEvent && (
+          <div
+            key={artistEvent.id}
+            className='container-card'
+            onClick={() => selectEvent(artistEvent)}
+          >
+            <div className='card'>
+              <ul className='front-card'>
+                <li className='event-date'>
+                  {formatDate(artistEvent.datetime)}
                 </li>
-                <li className='social-media'></li>
-                <li className='social-media'></li>
+                <li className='artist-name'>
+                  {artistInfos && artistInfos[0].strArtist}
+                </li>
+                <li className='artist-music-genre'>
+                  {artistInfos && artistInfos[0].strGenre}
+                </li>
+                <li className='title-event'>{artistEvent.venue.name}</li>
+                <li className='city-event'>{artistEvent.venue.city}</li>
+                <li className='url-ticket'>
+                  <a href={artistEvent.url}>Acheter mon ticket</a>
+                </li>
+                {artistEvent.lineup.map((name, index) => {
+                  if (index === 3) {
+                    return <li>Et d'autres...</li>;
+                  } else if (index >= 4) {
+                    return null;
+                  }
+                  return (
+                    <li
+                      key={name}
+                      className='artist-name'
+                      onClick={() => handleClickShowArtist()}
+                    >
+                      {name}
+                    </li>
+                  );
+                })}
+
+                <div className={`artist-info ${openInfos}`}>
+                  <p className='artist-descr'>
+                    {artistInfos && artistInfos[0].strBiographyFR}
+                  </p>
+                </div>
+                {artistInfos && <Video id={artistInfos[0].idArtist} />}
+                <ul>
+                  <li className='social-media'>
+                    {/* <a href={artistEvent.artist.links.includes('spotify').url}>
+                  <img src={spotify} alt='' />
+                </a> */}
+                  </li>
+                  <li className='social-media'></li>
+                  <li className='social-media'></li>
+                </ul>
               </ul>
-            </ul>
+            </div>
           </div>
-        </div>
-      )}
-    </section>
+        )}
+      </section>
+    </>
   );
 };
 
