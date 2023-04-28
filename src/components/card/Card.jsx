@@ -3,6 +3,7 @@ import Video from './Video';
 import youtbe from '../../img/youtube.svg';
 import spotify from '../../img/spotify.svg';
 import facebook from '../../img/facebook.svg';
+import soundcloud from '../../img/soundcloud.svg';
 
 const Card = ({ artistEvent, artistInfos, selectEvent, artist }) => {
   const formatDate = (datetime) => {
@@ -28,71 +29,98 @@ const Card = ({ artistEvent, artistInfos, selectEvent, artist }) => {
   };
 
   // const id = artistInfos[0].idArtist;
-  console.log('akekoukou', artistInfos);
-  // console.log(artist?.links.includes('youtube'));
+  // console.log('akekoukou', artistInfos);
+  console.log(artist?.links.find((link) => link.type === 'youtube'));
+  const spotifyLink = artist?.links.find((link) => link.type === 'spotify');
+  const facebookLink = artist?.links.find((link) => link.type === 'facebook');
+  const youtubeLink = artist?.links.find((link) => link.type === 'youtube');
+  const soundcloudLink = artist?.links.find(
+    (link) => link.type === 'soundcloud'
+  );
+  const spotifyUrl = spotifyLink ? spotifyLink.url : null;
+  console.log(artist?.links);
+  const facebookUrl = facebookLink ? facebookLink.url : null;
+  const youtubeUrl = youtubeLink ? youtubeLink.url : null;
+  const soundcloudUrl = soundcloudLink ? soundcloudLink.url : null;
   return (
-    <>
-      <section className='card-section'>
-        {artistEvent && (
-          <div
-            key={artistEvent.id}
-            className='container-card'
-            onClick={() => selectEvent(artistEvent)}
-          >
-            <div className='card'>
-              <ul className='front-card'>
-                <li className='event-date'>
-                  {formatDate(artistEvent.datetime)}
-                </li>
-                <li className='artist-name'>
-                  {artistInfos && artistInfos[0].strArtist}
-                </li>
-                <li className='artist-music-genre'>
-                  {artistInfos && artistInfos[0].strGenre}
-                </li>
-                <li className='title-event'>{artistEvent.venue.name}</li>
-                <li className='city-event'>{artistEvent.venue.city}</li>
-                <li className='url-ticket'>
-                  <a href={artistEvent.url}>Acheter mon ticket</a>
-                </li>
-                {artistEvent.lineup.map((name, index) => {
-                  if (index === 3) {
-                    return <li>Et d'autres...</li>;
-                  } else if (index >= 4) {
-                    return null;
-                  }
-                  return (
-                    <li
-                      key={name}
-                      className='artist-name'
-                      onClick={() => handleClickShowArtist()}
-                    >
-                      {name}
-                    </li>
-                  );
-                })}
+    <section className='card-section'>
+      {artistEvent && (
+        <div
+          key={artistEvent.id}
+          className='container-card'
+          onClick={() => selectEvent(artistEvent)}
+        >
+          <div className='card'>
+            <ul className='front-card'>
+              <li className='event-date'>{formatDate(artistEvent.datetime)}</li>
+              <li className='artist-name'>
+                {artistInfos && artistInfos[0].strArtist}
+              </li>
+              <li className='title-city-event'>
+                {artistEvent.venue.name} - {artistEvent.venue.city}
+              </li>
 
-                <div className={`artist-info ${openInfos}`}>
-                  <p className='artist-descr'>
-                    {artistInfos && artistInfos[0].strBiographyFR}
-                  </p>
-                </div>
-                {artistInfos && <Video id={artistInfos[0].idArtist} />}
-                <ul>
-                  <li className='social-media'>
-                    {/* <a href={artistEvent.artist.links.includes('spotify').url}>
-                  <img src={spotify} alt='' />
-                </a> */}
-                  </li>
-                  <li className='social-media'></li>
-                  <li className='social-media'></li>
-                </ul>
+              <ul className='other-artist'>
+                {artistEvent.lineup.map((name, index) => {
+                  if (index === 4) {
+                    return <li>Et d'autres...</li>;
+                  } else if (index >= 5) {
+                    return null;
+                  } else if (index > 0) {
+                    return (
+                      <li key={name} onClick={() => handleClickShowArtist()}>
+                        {name}
+                      </li>
+                    );
+                  }
+                })}
               </ul>
-            </div>
+              <div className={`artist-info ${openInfos}`}>
+                <p className='artist-descr'>
+                  {artistInfos && artistInfos[0].strBiographyFR}
+                </p>
+              </div>
+              <li className='url-ticket'>
+                <a href={artistEvent.url}>Acheter mon ticket</a>
+              </li>
+              <ul className='social-container'>
+                {spotifyUrl ? (
+                  <li className='social-media'>
+                    <a href={spotifyUrl}>
+                      <img src={spotify} alt='' className='spotify-icn' />
+                    </a>
+                  </li>
+                ) : null}
+                {soundcloudUrl ? (
+                  <li className='social-media'>
+                    <a href={soundcloudUrl}>
+                      <img src={soundcloud} alt='' className='soundcloud-icn' />
+                    </a>
+                  </li>
+                ) : null}
+                {facebookUrl ? (
+                  <li className='social-media'>
+                    <a href={facebookUrl}>
+                      <img src={facebook} alt='' className='facebook-icn' />
+                    </a>
+                  </li>
+                ) : null}
+                {youtubeUrl ? (
+                  <li className='social-media'>
+                    <a href={youtubeUrl}>
+                      <img src={youtbe} alt='' className='youtube-icn-icn' />
+                    </a>
+                  </li>
+                ) : null}
+              </ul>
+              <li className='video-cont'>
+                <Video id={artistInfos[0].idArtist} />
+              </li>
+            </ul>
           </div>
-        )}
-      </section>
-    </>
+        </div>
+      )}
+    </section>
   );
 };
 
