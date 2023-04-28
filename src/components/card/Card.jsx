@@ -25,7 +25,7 @@ const Card = ({ artistEvent, artistInfos, selectEvent, artist }) => {
   };
 
   // const id = artistInfos[0].idArtist;
-  console.log('akekoukou', artistInfos);
+  console.log('akekoukoukou', artistInfos);
   console.log(artist?.links.includes('youtube'));
   return (
     <section className='card-section'>
@@ -66,6 +66,7 @@ const Card = ({ artistEvent, artistInfos, selectEvent, artist }) => {
                   {artistInfos && artistInfos[0].strBiographyFR}
                 </div>
               )}
+
               {artistInfos && <Video id={artistInfos[0].idArtist} />}
               <ul>
                 <li className='social-media'>
