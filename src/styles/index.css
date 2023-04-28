@@ -89,6 +89,12 @@
   font-size: 1.1rem;
 }
 
+.card-video {
+  width: 100% !important;
+  height: auto !important;
+  margin-top: 40px;
+}
+
 .search-buttons-container {
   font-family: "Concert One", cursive;
   position: fixed;
