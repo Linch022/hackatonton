@@ -62,10 +62,6 @@
   min-height: 300px;
   width: 100%;
   position: relative;
-  transition: transform 1500ms;
-  transform-style: preserve-3d;
-  z-index: 0;
-  text-overflow: ellipsis;
   display: flex;
   justify-content: center;
   align-items: center;
