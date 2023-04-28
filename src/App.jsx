@@ -10,7 +10,7 @@ import vinyl from './img/vinyl.svg';
 import MarkerClusterGroup from 'react-leaflet-cluster';
 
 function App() {
-  const [searchInput, setSearchInput] = useState('the weeknd');
+  const [searchInput, setSearchInput] = useState('');
   const [artistInfos, setArtistInfos] = useState(null);
   const [artistEvents, setArtistEvents] = useState(null);
   const [array, setArray] = useState();
@@ -81,7 +81,7 @@ function App() {
   };
 
   return (
-    <MapContainer center={[45.71337, 5.12919]} zoom={3}>
+    <MapContainer center={[17.913250433640037, 8.623437289329258]} zoom={4}>
       <div className='container'>
         <Card
           artistEvents={artistEvents}
