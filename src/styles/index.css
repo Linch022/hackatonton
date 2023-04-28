@@ -58,14 +58,11 @@
 }
 .container-card .card {
   border-radius: 10px;
-  height: auto;
+  height: 100%;
   min-height: 300px;
   width: 100%;
   position: relative;
-  transition: transform 1500ms;
-  transform-style: preserve-3d;
   z-index: 0;
-  text-overflow: ellipsis;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -78,19 +75,69 @@
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: center;
 }
-.container-card .front-card .title-event {
-  width: 80%;
+.container-card .front-card .event-date {
+  font-weight: 600;
+  font-size: 1rem;
+}
+.container-card .front-card .artist-name {
+  font-weight: 600;
+  font-size: 1rem;
+}
+.container-card .front-card .title-city-event {
   text-align: center;
+  font-weight: 600;
+  font-size: 0.8rem;
+}
+.container-card .front-card .url-ticket {
+  border-radius: 5px;
+  border: 3.5px solid #000000;
+  outline: 0px solid transparent;
+  background: rgb(253, 253, 253);
+  padding: 5px;
+  box-shadow: 1px -2px black, 2px 0px black, 3px -3px black;
+}
+.container-card .front-card .url-ticket a {
+  color: black;
+  font-weight: 600;
+}
+.container-card .front-card .other-artist {
+  display: flex;
+  width: 80%;
+  flex-direction: row;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  font-weight: 600;
+  font-size: 0.8rem;
+}
+.container-card .front-card .social-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+}
+.container-card .front-card .social-container .social-media {
+  margin: 10px;
+  height: 30px;
+  width: 30px;
+}
+.container-card .front-card .social-container .social-media img {
+  height: 30px;
+}
+.container-card .front-card .video-cont {
+  height: 155px;
 }
 .container-card .front-card p {
   margin: 0 !important;
 }
-.container-card .front-card .event-date {
-  font-weight: 600;
-  font-size: 1.1rem;
+.container-card .front-card .social-media {
+  height: 20px;
+  width: 20px;
+}
+.container-card .front-card .facebook-icn {
+  color: blue;
 }
 
 .search-buttons-container {
