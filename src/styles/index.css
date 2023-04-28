@@ -88,7 +88,68 @@
   font-weight: 600;
   font-size: 1.1rem;
 }
+.container-card .artist-name:hover {
+  cursor: pointer;
+}
+.container-card .artist-info {
+  position: absolute;
+  top: 0;
+  right: 3px;
+  height: auto;
+  width: 500px;
+  padding: 10px;
+  transition: transform 2s;
+  transform: translateX(0%);
+  opacity: 0;
+  z-index: -1;
+  height: 395px;
+  border-radius: 5px;
+  border: 3.5px solid #000000;
+  outline: 0px solid transparent;
+  background: rgba(253, 253, 253, 0.18);
+  box-shadow: 1px -2px black, 2px 0px black, 3px -3px black;
+  -webkit-backdrop-filter: blur(4px);
+          backdrop-filter: blur(4px);
+  text-align: justify;
+}
+.container-card .artist-info .artist-descr {
+  height: 200px;
+  overflow: scroll;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.container-card .artist-info .artist-descr::-webkit-scrollbar {
+  display: none;
+}
+.container-card .open {
+  animation: card-open 2s ease;
+  animation-fill-mode: forwards;
+}
+.container-card .close {
+  animation: card-close 2s ease;
+  animation-fill-mode: forwards;
+}
 
+@keyframes card-open {
+  0% {
+    transform: translateX(0%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(100%);
+    opacity: 1;
+  }
+}
+@keyframes card-close {
+  0% {
+    transform: translateX(100%);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(0%);
+    opacity: 0;
+  }
+}
 .search-buttons-container {
   font-family: "Concert One", cursive;
   position: fixed;

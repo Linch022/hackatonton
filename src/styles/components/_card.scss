@@ -34,7 +34,6 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-
     .title-event {
       width: 80%;
       text-align: center;
@@ -47,8 +46,71 @@
       font-size: 1.1rem;
     }
   }
+
+  .artist-name:hover {
+    cursor: pointer;
+  }
+
+  .artist-info {
+    position: absolute;
+    top: 0;
+    right: 3px;
+    height: auto;
+    width: 500px;
+    padding: 10px;
+    transition: transform 2s;
+    transform: translateX(0%);
+    opacity: 0;
+    z-index: -1;
+    height: 395px;
+    border-radius: 5px;
+    border: 3.5px solid #000000;
+    outline: 0px solid transparent;
+    background: rgb(253 253 253 / 18%);
+    box-shadow: 1px -2px black, 2px 0px black, 3px -3px black;
+    backdrop-filter: blur(4px);
+    text-align: justify;
+
+    .artist-descr {
+      height: 200px;
+      overflow: scroll;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+    .artist-descr::-webkit-scrollbar {
+      display: none;
+    }
+  }
+  .open {
+    animation: card-open 2s ease;
+    animation-fill-mode: forwards;
+  }
+  .close {
+    animation: card-close 2s ease;
+    animation-fill-mode: forwards;
+  }
 }
 
+@keyframes card-open {
+  0% {
+    transform: translateX(0%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(100%);
+    opacity: 1;
+  }
+}
+@keyframes card-close {
+  0% {
+    transform: translateX(100%);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(0%);
+    opacity: 0;
+  }
+}
 // .container-card {
 //   width: 250px;
 //   min-height: 300px;
