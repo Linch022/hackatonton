@@ -1,4 +1,4 @@
-import React from 'react';
+import { useState } from 'react';
 import Video from './Video';
 import youtbe from '../../img/youtube.svg';
 import spotify from '../../img/spotify.svg';
@@ -17,12 +17,15 @@ const Card = ({ artistEvent, artistInfos, selectEvent, artist }) => {
     }-${year} / ${hours}h${String(minutes).padStart(2, '0')}`;
   };
 
+  const [showArtistInfo, setShowArtistInfo] = useState(false);
+
   const handleClickShowArtist = () => {
+    setShowArtistInfo(!showArtistInfo);
     console.log('do Something on Click');
   };
 
   // const id = artistInfos[0].idArtist;
-  // console.log('akekoukou', artistInfos);
+  console.log('akekoukoukou', artistInfos);
   console.log(artist?.links.includes('youtube'));
   return (
     <section className='card-section'>
@@ -37,6 +40,9 @@ const Card = ({ artistEvent, artistInfos, selectEvent, artist }) => {
               <li className='event-date'>{formatDate(artistEvent.datetime)}</li>
               <li className='artist-name'>
                 {artistInfos && artistInfos[0].strArtist}
+              </li>
+              <li className='artist-music-genre'>
+                {artistInfos && artistInfos[0].strGenre}
               </li>
               <li className='title-event'>{artistEvent.venue.name}</li>
               <li className='city-event'>{artistEvent.venue.city}</li>
@@ -55,6 +61,12 @@ const Card = ({ artistEvent, artistInfos, selectEvent, artist }) => {
                   </li>
                 );
               })}
+              {showArtistInfo && (
+                <div className='artist-info'>
+                  {artistInfos && artistInfos[0].strBiographyFR}
+                </div>
+              )}
+
               {artistInfos && <Video id={artistInfos[0].idArtist} />}
               <ul>
                 <li className='social-media'>
@@ -66,20 +78,6 @@ const Card = ({ artistEvent, artistInfos, selectEvent, artist }) => {
                 <li className='social-media'></li>
               </ul>
             </ul>
-            {/* <div className='back-card'>
-              <ul className='lineup'>
-                {artistEvent.lineup.map((name, index) => {
-                  if (index > 12) {
-                    return null;
-                  }
-                  return (
-                    <li key={name} onClick={() => handleClickShowArtist()}>
-                      {name}
-                    </li>
-                  );
-                })}
-              </ul>
-            </div> */}
           </div>
         </div>
       )}
