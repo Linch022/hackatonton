@@ -1,11 +1,15 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Video from './Video';
 import youtbe from '../../img/youtube.svg';
 import spotify from '../../img/spotify.svg';
 import facebook from '../../img/facebook.svg';
 import soundcloud from '../../img/soundcloud.svg';
+import axios from 'axios';
 
 const Card = ({ artistEvent, artistInfos, selectEvent, artist }) => {
+  const [lineUpArtist, setLineUpArtist] = useState(null);
+  const [lastArtist, setLastArtist] = useState(null);
+  const [lineUpInfos, setLineUpInfos] = useState();
   const formatDate = (datetime) => {
     const date = new Date(datetime);
     const day = date.getDate();
@@ -18,14 +22,47 @@ const Card = ({ artistEvent, artistInfos, selectEvent, artist }) => {
     }-${year} / ${hours}h${String(minutes).padStart(2, '0')}`;
   };
 
-  const [openInfos, setOpenInfos] = useState('');
-
-  const handleClickShowArtist = () => {
-    if (openInfos === '' || openInfos === 'close') {
-      setOpenInfos('open');
-    } else {
-      setOpenInfos('close');
+  useEffect(() => {
+    if (lineUpArtist) {
+      axios
+        .get(
+          `https://www.theaudiodb.com/api/v1/json/523532/search.php?s=${lineUpArtist
+            .toLowerCase()
+            .replace(' ', '_')}`
+        )
+        .then((res) => {
+          setLineUpInfos(res.data.artists);
+          console.log(res.data.artists);
+        })
+        .catch((err) => console.error(err.message));
     }
+  }, [lineUpArtist]);
+
+  const [openInfos, setOpenInfos] = useState('');
+  // const changeClass = () => {
+  //   setTimeout(() => {}, timeout);
+  // };
+  const handleClickShowArtist = (name) => {
+    setLineUpArtist(name);
+    if (lastArtist === name) {
+      setOpenInfos('close');
+      setLastArtist(null);
+    } else if (!lastArtist) {
+      setOpenInfos('open');
+      setLastArtist(name);
+    } else if (lastArtist !== name) {
+      setLastArtist(lineUpArtist);
+      setOpenInfos('close');
+      setTimeout(() => {
+        setOpenInfos('open');
+      }, 2000);
+    }
+    // setLineUpArtist(name);
+    // console.log(name);
+    // if (openInfos === '' || openInfos === 'close') {
+    // } else {
+    //   setOpenInfos('close');
+    // }
   };
 
   // const id = artistInfos[0].idArtist;
@@ -42,6 +79,7 @@ const Card = ({ artistEvent, artistInfos, selectEvent, artist }) => {
   const facebookUrl = facebookLink ? facebookLink.url : null;
   const youtubeUrl = youtubeLink ? youtubeLink.url : null;
   const soundcloudUrl = soundcloudLink ? soundcloudLink.url : null;
+
   return (
     <section className='card-section'>
       {artistEvent && (
@@ -68,18 +106,16 @@ const Card = ({ artistEvent, artistInfos, selectEvent, artist }) => {
                     return null;
                   } else if (index > 0) {
                     return (
-                      <li key={name} onClick={() => handleClickShowArtist()}>
+                      <li
+                        key={name}
+                        onClick={() => handleClickShowArtist(name)}
+                      >
                         {name}
                       </li>
                     );
                   }
                 })}
               </ul>
-              <div className={`artist-info ${openInfos}`}>
-                <p className='artist-descr'>
-                  {artistInfos && artistInfos[0].strBiographyFR}
-                </p>
-              </div>
               <li className='url-ticket'>
                 <a href={artistEvent.url}>Acheter mon ticket</a>
               </li>
@@ -117,6 +153,16 @@ const Card = ({ artistEvent, artistInfos, selectEvent, artist }) => {
                 <Video id={artistInfos[0].idArtist} />
               </li>
             </ul>
+          </div>
+          <div className={`artist-info ${openInfos}`}>
+            {lineUpInfos ? (
+              lineUpInfos[0].strBiographyFR ? (
+                <p className='artist-descr'>{lineUpInfos[0].strBiographyFR}</p>
+              ) : (
+                <p className='artist-descr'>{lineUpInfos[0].strBiographyEN}</p>
+              )
+            ) : null}
+            {lineUpInfos ? <Video id={lineUpInfos[0].idArtist} /> : null}
           </div>
         </div>
       )}
