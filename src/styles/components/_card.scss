@@ -198,9 +198,30 @@
     .container-card {
       .artist-info {
         width: 300px;
-        top: 105%;
-        right: 100%;
+        top: 10px;
+        right: 0;
+        transform: translateY(0%);
       }
+    }
+  }
+  @keyframes card-open {
+    0% {
+      transform: translateY(0%);
+      opacity: 0;
+    }
+    100% {
+      transform: translateY(100%);
+      opacity: 1;
+    }
+  }
+  @keyframes card-close {
+    0% {
+      transform: translateY(100%);
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(0%);
+      opacity: 0;
     }
   }
 }
