@@ -40,6 +40,7 @@ function App() {
       .catch((err) => console.error(err.message));
   }, [searchInput]);
 
+  console.log(artistEvents, 'event');
   let markers = [];
   useEffect(() => {
     let latitudeArray = [];
@@ -99,6 +100,7 @@ function App() {
                   artistEvent={artistEvents[index]}
                   artistInfos={artistInfos}
                   selectEvent={handleSelectEvent}
+                  artist={artistEvents[0].artist}
                 />
               </Popup>
             </Marker>

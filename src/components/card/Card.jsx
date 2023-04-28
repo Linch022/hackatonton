@@ -1,6 +1,10 @@
 import React from 'react';
+import Video from './Video';
+import youtbe from '../../img/youtube.svg';
+import spotify from '../../img/spotify.svg';
+import facebook from '../../img/facebook.svg';
 
-const Card = ({ artistEvent, artistInfos, selectEvent }) => {
+const Card = ({ artistEvent, artistInfos, selectEvent, artist }) => {
   const formatDate = (datetime) => {
     const date = new Date(datetime);
     const day = date.getDate();
@@ -17,8 +21,9 @@ const Card = ({ artistEvent, artistInfos, selectEvent }) => {
     console.log('do Something on Click');
   };
 
-  console.log('akekoukou', artistInfos);
-
+  // const id = artistInfos[0].idArtist;
+  // console.log('akekoukou', artistInfos);
+  console.log(artist?.links.includes('youtube'));
   return (
     <section className='card-section'>
       {artistEvent && (
@@ -28,15 +33,40 @@ const Card = ({ artistEvent, artistInfos, selectEvent }) => {
           onClick={() => selectEvent(artistEvent)}
         >
           <div className='card'>
-            <div className='front-card'>
-              <h2 className='artist-name'>
+            <ul className='front-card'>
+              <li className='event-date'>{formatDate(artistEvent.datetime)}</li>
+              <li className='artist-name'>
                 {artistInfos && artistInfos[0].strArtist}
-              </h2>
-              <h3 className='title-event'>{artistEvent.venue.name}</h3>
-              <p className='city-event'>{artistEvent.venue.city}</p>
-              <p className='event-date'>{formatDate(artistEvent.datetime)}</p>
-            </div>
-            <div className='back-card'>
+              </li>
+              <li className='title-event'>{artistEvent.venue.name}</li>
+              <li className='city-event'>{artistEvent.venue.city}</li>
+              <li className='url-ticket'>
+                <a href={artistEvent.url}>Acheter mon ticket</a>
+              </li>
+              {artistEvent.lineup.map((name, index) => {
+                if (index === 3) {
+                  return <li>Et d'autres...</li>;
+                } else if (index >= 4) {
+                  return null;
+                }
+                return (
+                  <li key={name} onClick={() => handleClickShowArtist()}>
+                    {name}
+                  </li>
+                );
+              })}
+              {artistInfos && <Video id={artistInfos[0].idArtist} />}
+              <ul>
+                <li className='social-media'>
+                  {/* <a href={artistEvent.artist.links.includes('spotify').url}>
+                    <img src={spotify} alt='' />
+                  </a> */}
+                </li>
+                <li className='social-media'></li>
+                <li className='social-media'></li>
+              </ul>
+            </ul>
+            {/* <div className='back-card'>
               <ul className='lineup'>
                 {artistEvent.lineup.map((name, index) => {
                   if (index > 12) {
@@ -49,7 +79,7 @@ const Card = ({ artistEvent, artistInfos, selectEvent }) => {
                   );
                 })}
               </ul>
-            </div>
+            </div> */}
           </div>
         </div>
       )}
