@@ -4,7 +4,7 @@ import ReactPlayer from "react-player";
 
 const Video = ({ id }) => {
   const [urlVideo, setUrlVideo] = useState("");
-  const [playing, setPlaying] = useState(true);
+  const [playing, setPlaying] = useState(false);
   console.log(id);
   useEffect(() => {
     axios
@@ -27,12 +27,11 @@ const Video = ({ id }) => {
       {
         <ReactPlayer
           className="card-video"
-          onReady={() => setPlaying(true)}
           playing={playing}
           url={urlVideo}
           config={{
             youtube: {
-              playerVars: { showinfo: 1 },
+              playerVars: { showinfo: 1, controls: 2 },
             },
           }}
         />
