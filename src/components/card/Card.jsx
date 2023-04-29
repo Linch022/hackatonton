@@ -32,7 +32,6 @@ const Card = ({ artistEvent, artistInfos, selectEvent, artist }) => {
         )
         .then((res) => {
           setLineUpInfos(res.data.artists);
-          console.log(res.data.artists);
         })
         .catch((err) => console.error(err.message));
     }
@@ -57,17 +56,8 @@ const Card = ({ artistEvent, artistInfos, selectEvent, artist }) => {
         setOpenInfos('open');
       }, 2000);
     }
-    // setLineUpArtist(name);
-    // console.log(name);
-    // if (openInfos === '' || openInfos === 'close') {
-    // } else {
-    //   setOpenInfos('close');
-    // }
   };
 
-  // const id = artistInfos[0].idArtist;
-  // console.log('akekoukou', artistInfos);
-  console.log(artist?.links.find((link) => link.type === 'youtube'));
   const spotifyLink = artist?.links.find((link) => link.type === 'spotify');
   const facebookLink = artist?.links.find((link) => link.type === 'facebook');
   const youtubeLink = artist?.links.find((link) => link.type === 'youtube');
@@ -75,7 +65,6 @@ const Card = ({ artistEvent, artistInfos, selectEvent, artist }) => {
     (link) => link.type === 'soundcloud'
   );
   const spotifyUrl = spotifyLink ? spotifyLink.url : null;
-  console.log(artist?.links);
   const facebookUrl = facebookLink ? facebookLink.url : null;
   const youtubeUrl = youtubeLink ? youtubeLink.url : null;
   const soundcloudUrl = soundcloudLink ? soundcloudLink.url : null;

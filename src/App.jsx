@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import './styles/index.css';
 import axios from 'axios';
 import Card from './components/card/Card';
@@ -14,8 +14,7 @@ function App() {
   const [artistInfos, setArtistInfos] = useState(null);
   const [artistEvents, setArtistEvents] = useState(null);
   const [array, setArray] = useState();
-  const markerRef = useRef();
-
+  const [errorMessage, setErrorMessage] = useState('error-message-visible');
   useEffect(() => {
     axios
       .get(
@@ -40,7 +39,6 @@ function App() {
       .catch((err) => console.error(err.message));
   }, [searchInput]);
 
-  console.log(artistEvents, 'event');
   let markers = [];
   useEffect(() => {
     let latitudeArray = [];
@@ -57,9 +55,6 @@ function App() {
     }
     setArray(markers);
   }, [artistEvents]);
-  console.log(array);
-
-  console.log(artistEvents);
 
   const [selectEvent, setSelectEvent] = useState(null);
   const handleSelectEvent = (event) => {
@@ -75,41 +70,60 @@ function App() {
   const createCustomClusterIcon = (cluster) => {
     return new divIcon({
       html: `<div class="cluster-icon">${cluster.getChildCount()}</div>`,
-      // className: 'custom-marker-cluster',
       iconSize: [33, 33],
     });
   };
 
+  const hideError = () => {
+    setErrorMessage('error-message-hidden');
+  };
+
+  useEffect(() => {
+    if (artistEvents && artistEvents.length === 0) {
+      setErrorMessage('error-message-visible');
+    }
+  }, [searchInput]);
+
   return (
     <MapContainer center={[17.913250433640037, 8.623437289329258]} zoom={4}>
-      <div className='container'>
-        <Card
-          artistEvents={artistEvents}
-          artistInfos={artistInfos}
-          selectEvent={handleSelectEvent}
-        />
-        <TileLayer url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png' />
-        <MarkerClusterGroup
-          chunkedLoading
-          iconCreateFunction={createCustomClusterIcon}
-        >
-          {array?.map((marker, index) => (
-            <Marker position={marker.geocode} icon={customIcon}>
-              <Popup className='custom-popup'>
-                <Card
-                  artistEvent={artistEvents[index]}
-                  artistInfos={artistInfos}
-                  selectEvent={handleSelectEvent}
-                  artist={artistEvents[0].artist}
-                />
-              </Popup>
-            </Marker>
-          ))}
-        </MarkerClusterGroup>
-        <div className='search-buttons-container'>
-          <Search setSearchInput={setSearchInput} />
-        </div>
+      <TileLayer url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png' />
+      <div className='search-buttons-container'>
+        <Search setSearchInput={setSearchInput} />
       </div>
+      {artistEvents && artistEvents.length === 0 && (
+        <div className={errorMessage}>
+          <h2>Déso, pas de concert</h2>
+          <button type='button' onClick={hideError}>
+            OK
+          </button>
+        </div>
+      )}
+      {artistEvents ? (
+        <div className='container'>
+          <Card
+            artistEvents={artistEvents}
+            artistInfos={artistInfos}
+            selectEvent={handleSelectEvent}
+          />
+          <MarkerClusterGroup
+            chunkedLoading
+            iconCreateFunction={createCustomClusterIcon}
+          >
+            {array?.map((marker, index) => (
+              <Marker position={marker.geocode} icon={customIcon}>
+                <Popup className='custom-popup'>
+                  <Card
+                    artistEvent={artistEvents[index]}
+                    artistInfos={artistInfos}
+                    selectEvent={handleSelectEvent}
+                    artist={artistEvents[0]?.artist}
+                  />
+                </Popup>
+              </Marker>
+            ))}
+          </MarkerClusterGroup>
+        </div>
+      ) : null}
     </MapContainer>
   );
 }

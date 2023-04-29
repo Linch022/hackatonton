@@ -1,20 +1,15 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
-import ReactPlayer from "react-player";
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import ReactPlayer from 'react-player';
 
 const Video = ({ id }) => {
-  const [urlVideo, setUrlVideo] = useState("");
+  const [urlVideo, setUrlVideo] = useState('');
   const [playing, setPlaying] = useState(false);
-  console.log(id);
   useEffect(() => {
     axios
       .get(`https://theaudiodb.com/api/v1/json/523532/mvid.php?i=${id}`)
       .then((res) => {
         setUrlVideo(
-          res.data.mvids[Math.floor(Math.random() * res.data.mvids.length)]
-            .strMusicVid
-        );
-        console.log(
           res.data.mvids[Math.floor(Math.random() * res.data.mvids.length)]
             .strMusicVid
         );
@@ -26,7 +21,7 @@ const Video = ({ id }) => {
     <div>
       {
         <ReactPlayer
-          className="card-video"
+          className='card-video'
           playing={playing}
           url={urlVideo}
           config={{
