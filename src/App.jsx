@@ -2,127 +2,96 @@ import { useState, useEffect } from 'react';
 import './styles/index.css';
 import axios from 'axios';
 import Card from './components/card/Card';
-import Search from './components/Search';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import { Icon, divIcon } from 'leaflet';
 import vinyl from './img/vinyl.svg';
 import MarkerClusterGroup from 'react-leaflet-cluster';
+import Query from './components/Query';
 
 function App() {
-  const [searchInput, setSearchInput] = useState('');
-  const [artistInfos, setArtistInfos] = useState(null);
-  const [artistEvents, setArtistEvents] = useState(null);
-  const [array, setArray] = useState();
-  const [errorMessage, setErrorMessage] = useState('error-message-visible');
+  const [userQuery, setUserQuery] = useState('');
+  const [artistData, setArtistData] = useState(null);
+  const [eventList, setEventList] = useState(null);
+  const [markersCoords, setMarkersCoords] = useState([]);
+
+  useEffect(() => {
+    userQuery !== '' &&
+      axios
+        .get(
+          `https://rest.bandsintown.com/artists/${userQuery
+            .toLowerCase()
+            .replace(' ', '%20')}/events?app_id=67`
+        )
+        .then((res) => {
+          setEventList(res.data);
+        })
+        .catch((err) => console.error(err.message));
+  }, [userQuery]);
+
   useEffect(() => {
     axios
       .get(
-        `https://www.theaudiodb.com/api/v1/json/523532/search.php?s=${searchInput
+        `https://www.theaudiodb.com/api/v1/json/523532/search.php?s=${userQuery
           .toLowerCase()
           .replace(' ', '_')}`
       )
       .then((res) => {
-        setArtistInfos(res.data.artists);
+        setArtistData(res.data.artists);
       })
       .catch((err) => console.error(err.message));
+  }, [userQuery]);
 
-    axios
-      .get(
-        `https://rest.bandsintown.com/artists/${searchInput
-          .toLowerCase()
-          .replace(' ', '%20')}/events?app_id=67`
-      )
-      .then((res) => {
-        setArtistEvents(res.data);
-      })
-      .catch((err) => console.error(err.message));
-  }, [searchInput]);
-
-  let markers = [];
   useEffect(() => {
-    let latitudeArray = [];
-    let longitudeArray = [];
-    for (let i = 0; i < artistEvents?.length; i++) {
-      const latitude = artistEvents[i].venue.latitude;
-      latitudeArray.push(latitude);
-      const longitude = artistEvents[i].venue.longitude;
-      longitudeArray.push(longitude);
-    }
-    for (let i = 0; i < latitudeArray.length; i++) {
-      const marker = { geocode: [latitudeArray[i], longitudeArray[i]] };
-      markers.push(marker);
-    }
-    setArray(markers);
-  }, [artistEvents]);
+    const markers = [];
+    eventList?.map((event) => {
+      const { longitude, latitude } = event.venue;
+      const geocode = [latitude, longitude];
+      const { lineup } = event;
+      const name = lineup[0].toLowerCase();
+      const marker = { geocode, name };
+      return markers.push(marker);
+    });
+    setMarkersCoords(markers);
+  }, [eventList]);
 
-  const [selectEvent, setSelectEvent] = useState(null);
-  const handleSelectEvent = (event) => {
-    setSelectEvent(event);
-  };
-
-  const customIcon = new Icon({
+  const customMarker = new Icon({
     iconUrl: vinyl,
     iconSize: [38, 38],
-    className: 'anim-vinyl',
   });
 
-  const createCustomClusterIcon = (cluster) => {
-    return new divIcon({
+  const createClusterIcon = (cluster) => {
+    return divIcon({
       html: `<div class="cluster-icon">${cluster.getChildCount()}</div>`,
       iconSize: [33, 33],
     });
   };
-
-  const hideError = () => {
-    setErrorMessage('error-message-hidden');
-  };
-
-  useEffect(() => {
-    if (artistEvents && artistEvents.length === 0) {
-      setErrorMessage('error-message-visible');
-    }
-  }, [searchInput]);
-
+  console.log(eventList);
   return (
-    <MapContainer center={[17.913250433640037, 8.623437289329258]} zoom={4}>
+    <MapContainer
+      center={[17.913250433640037, 8.623437289329258]}
+      zoom={4}
+      minZoom={2}
+    >
       <TileLayer url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png' />
-      <div className='search-buttons-container'>
-        <Search setSearchInput={setSearchInput} />
-      </div>
-      {artistEvents && artistEvents.length === 0 && (
-        <div className={errorMessage}>
-          <h2>Déso, pas de concert</h2>
-          <button type='button' onClick={hideError}>
-            OK
-          </button>
-        </div>
-      )}
-      {artistEvents ? (
-        <div className='container'>
-          <Card
-            artistEvents={artistEvents}
-            artistInfos={artistInfos}
-            selectEvent={handleSelectEvent}
-          />
-          <MarkerClusterGroup
-            chunkedLoading
-            iconCreateFunction={createCustomClusterIcon}
-          >
-            {array?.map((marker, index) => (
-              <Marker position={marker.geocode} icon={customIcon}>
-                <Popup className='custom-popup'>
-                  <Card
-                    artistEvent={artistEvents[index]}
-                    artistInfos={artistInfos}
-                    selectEvent={handleSelectEvent}
-                    artist={artistEvents[0]?.artist}
-                  />
-                </Popup>
-              </Marker>
-            ))}
-          </MarkerClusterGroup>
-        </div>
+      <Query query={setUserQuery} />
+      {eventList ? (
+        <MarkerClusterGroup
+          chunkedLoading
+          iconCreateFunction={createClusterIcon}
+        >
+          {markersCoords.map((marker, index) => (
+            <Marker key={index} position={marker.geocode} icon={customMarker}>
+              <Popup>
+                <Card
+                  event={eventList[index]}
+                  artistData={artistData}
+                  artist={eventList[0]?.artist}
+                />
+              </Popup>
+            </Marker>
+          ))}
+        </MarkerClusterGroup>
       ) : null}
     </MapContainer>
   );

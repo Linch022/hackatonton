@@ -1,11 +1,11 @@
 import React from 'react';
 
-const Search = ({ setSearchInput }) => {
+const Query = ({ query }) => {
   const handleSearchValue = () => {
     const input = document.getElementById('search-input');
     let { value } = input;
     if (value !== '') {
-      setSearchInput(value);
+      query(value);
       console.log(value);
       input.value = '';
     }
@@ -26,4 +26,4 @@ const Search = ({ setSearchInput }) => {
   );
 };
 
-export default Search;
+export default Query;

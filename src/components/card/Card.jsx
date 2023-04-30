@@ -19,7 +19,7 @@ const Card = ({ artistEvent, artistInfos, selectEvent, artist }) => {
     const minutes = date.getMinutes();
     return `${day < 10 ? '0' + day : day}-${
       month < 10 ? '0' + month : month
-    }-${year} / ${hours}h${String(minutes).padStart(2, '0')}`;
+    }-${year} à ${hours}h${String(minutes).padStart(2, '0')}`;
   };
 
   useEffect(() => {
@@ -38,9 +38,6 @@ const Card = ({ artistEvent, artistInfos, selectEvent, artist }) => {
   }, [lineUpArtist]);
 
   const [openInfos, setOpenInfos] = useState('');
-  // const changeClass = () => {
-  //   setTimeout(() => {}, timeout);
-  // };
   const handleClickShowArtist = (name) => {
     setLineUpArtist(name);
     if (lastArtist === name) {
