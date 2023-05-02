@@ -92,7 +92,7 @@ function App() {
   }, [hasConcert, hasArtist]);
 
   const corner1 = L.latLng(-100, -200);
-  const corner2 = L.latLng(50, 200);
+  const corner2 = L.latLng(90, 200);
   const bounds = L.latLngBounds(corner1, corner2);
 
   return (
