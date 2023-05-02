@@ -1,15 +1,9 @@
-// Exemple variable
-
-// $ex-color: blue;
-
-// @font-face {
-//   font-family: "raleway-bold";
-//   src: url(../fonts/raleway/Raleway-Bold.ttf);
-// }
-
-// $font4: "raleway-bold";
-
+@font-face {
+  font-family: 'concert one';
+  src: url('./fonts/ConcertOne-Regular.ttf');
+}
 * {
+  font-family: 'concert one';
   margin: 0;
   padding: 0;
   box-sizing: border-box;

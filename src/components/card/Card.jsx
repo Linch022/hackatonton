@@ -99,7 +99,9 @@ const Card = ({ event, artistData, artist }) => {
                 })}
               </ul>
               <li className='url-ticket'>
-                <a href={event.url}>Acheter mon ticket</a>
+                <a href={event.url} target='blank'>
+                  Acheter mon ticket
+                </a>
               </li>
               <ul className='social-container'>
                 {spotifyUrl ? (

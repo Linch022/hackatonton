@@ -9,7 +9,7 @@
 }
 
 .leaflet-container {
-  height: 200vh;
+  height: 100vh;
 }
 
 .cluster-icon {
@@ -29,28 +29,28 @@
 }
 
 .error-message-visible {
-  visibility: visible;
-  align-self: center;
   z-index: 2000;
   height: 200px;
-  width: 450px;
-  border: 1px solid black;
-  border-radius: 15px;
+  width: 400px;
+  border-radius: 5px;
   position: relative;
   display: flex;
+  flex-direction: column;
   margin: auto;
   top: 5%;
   align-items: center;
-  justify-content: center;
-  padding-left: 30px;
-  padding-right: 40px;
+  justify-content: space-around;
+  -webkit-backdrop-filter: blur(2px);
   backdrop-filter: blur(2px);
   font-family: 'Concert One', cursive;
   font-size: 1rem;
   border: 3.5px solid #000000;
   outline: 0px solid transparent;
-  background: rgb(253 253 253 / 65%);
+  background: rgb(253 253 253 / 51%);
   box-shadow: 3px -2px black, 3px -1px black;
+  button {
+    width: 50px;
+  }
 }
 
 .error-message-hidden {

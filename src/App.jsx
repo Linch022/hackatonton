@@ -16,21 +16,6 @@ function App() {
   const [eventList, setEventList] = useState(null);
   const [markersCoords, setMarkersCoords] = useState([]);
   const [errorMessage, setErrorMessage] = useState(false);
-<<<<<<< HEAD
-
-  useEffect(() => {
-    axios
-      .get(
-        `https://rest.bandsintown.com/artists/${userQuery
-          .toLowerCase()
-          .replace(' ', '%20')}/events?app_id=67`
-      )
-      .then((res) => {
-        setEventList(res.data);
-        console.log(res);
-      })
-      .catch((err) => console.error(err.message));
-=======
   const [hasConcert, setHasConcert] = useState(true);
   const [hasArtist, setHasArtist] = useState(true);
 
@@ -56,7 +41,6 @@ function App() {
           setHasArtist(false);
           setHasConcert(false);
         });
->>>>>>> bf53d53fa99888f3255fe107f0326c6391d14a98
   }, [userQuery]);
 
   useEffect(() => {
@@ -103,12 +87,6 @@ function App() {
   console.log(eventList);
 
   useEffect(() => {
-<<<<<<< HEAD
-    setErrorMessage(
-      !eventList || (eventList && eventList.length === 0) ? true : false
-    );
-  }, [eventList]);
-=======
     setErrorMessage(!hasConcert ? true : false);
     setStateToInitial();
   }, [hasConcert, hasArtist]);
@@ -116,7 +94,6 @@ function App() {
   const corner1 = L.latLng(-100, -200);
   const corner2 = L.latLng(90, 200);
   const bounds = L.latLngBounds(corner1, corner2);
->>>>>>> bf53d53fa99888f3255fe107f0326c6391d14a98
 
   return (
     <MapContainer
@@ -127,17 +104,6 @@ function App() {
       maxBounds={bounds}
     >
       <TileLayer url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png' />
-<<<<<<< HEAD
-      <Query query={setUserQuery} />
-
-      {errorMessage && userQuery !== '' && (
-        <div className='error-message-visible'>
-          {eventList ? (
-            <h2>Déso, pas de concert de {userQuery} prévu prochainement</h2>
-          ) : (
-            <h2>Déso, {userQuery} c'est pas un vrai groupe</h2>
-          )}
-=======
       <Query
         query={setUserQuery}
         setErrorMessage={setErrorMessage}
@@ -154,7 +120,6 @@ function App() {
             <h2>Déso, {userQuery} existe pas la fami</h2>
           )}
 
->>>>>>> bf53d53fa99888f3255fe107f0326c6391d14a98
           <button
             type='button'
             onClick={() => {
