@@ -37,11 +37,37 @@
   color: white;
 }
 
+.custom-popup {
+  align-self: center;
+  z-index: 2000;
+  height: 350px;
+  width: 200px;
+  border: 1px solid black;
+  border-radius: 15px;
+  position: relative;
+  display: flex;
+  margin: auto;
+  top: 5%;
+  align-items: center;
+  justify-content: center;
+  padding-left: 30px;
+  padding-right: 40px;
+  -webkit-backdrop-filter: blur(2px);
+          backdrop-filter: blur(2px);
+  font-family: "Concert One", cursive;
+  font-size: 1rem;
+  border: 3.5px solid #000000;
+  outline: 0px solid transparent;
+  background: rgba(253, 253, 253, 0.65);
+  box-shadow: 3px -2px black, 3px -1px black;
+}
+
 .error-message-visible {
   visibility: visible;
+  align-self: center;
   z-index: 2000;
-  height: 100px;
-  width: 350px;
+  height: 200px;
+  width: 450px;
   border: 1px solid black;
   border-radius: 15px;
   position: relative;
@@ -370,11 +396,37 @@
   color: white;
 }
 
+.custom-popup {
+  align-self: center;
+  z-index: 2000;
+  height: 350px;
+  width: 200px;
+  border: 1px solid black;
+  border-radius: 15px;
+  position: relative;
+  display: flex;
+  margin: auto;
+  top: 5%;
+  align-items: center;
+  justify-content: center;
+  padding-left: 30px;
+  padding-right: 40px;
+  -webkit-backdrop-filter: blur(2px);
+          backdrop-filter: blur(2px);
+  font-family: "Concert One", cursive;
+  font-size: 1rem;
+  border: 3.5px solid #000000;
+  outline: 0px solid transparent;
+  background: rgba(253, 253, 253, 0.65);
+  box-shadow: 3px -2px black, 3px -1px black;
+}
+
 .error-message-visible {
   visibility: visible;
+  align-self: center;
   z-index: 2000;
-  height: 100px;
-  width: 350px;
+  height: 200px;
+  width: 450px;
   border: 1px solid black;
   border-radius: 15px;
   position: relative;

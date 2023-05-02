@@ -14,7 +14,8 @@ function App() {
   const [artistData, setArtistData] = useState(null);
   const [eventList, setEventList] = useState(null);
   const [markersCoords, setMarkersCoords] = useState([]);
-  const [errorMessage, setErrorMessage] = useState('error-message-hidden');
+  const [errorMessage, setErrorMessage] = useState(false);
+  const [errorBool, setErrorBool] = useState(true);
 
   useEffect(() => {
     userQuery !== '' &&
@@ -70,12 +71,8 @@ function App() {
   console.log(eventList);
 
   useEffect(() => {
-    setErrorMessage(
-      eventList && eventList.length === 0
-        ? 'error-message-visible'
-        : 'error-message-hidden'
-    );
-  }, [eventList]);
+    setErrorMessage(eventList && eventList.length === 0 ? true : false);
+  }, [eventList, errorBool]);
 
   return (
     <MapContainer
@@ -84,19 +81,25 @@ function App() {
       minZoom={2}
     >
       <TileLayer url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png' />
-      <Query query={setUserQuery} />
+      <Query
+        query={setUserQuery}
+        setErrorBool={setErrorBool}
+        errorBool={errorBool}
+      />
 
-      <div className={errorMessage}>
-        <h2>Déso, pas de concert</h2>
-        <button
-          type='button'
-          onClick={() => {
-            setErrorMessage('error-message-hidden');
-          }}
-        >
-          OK
-        </button>
-      </div>
+      {errorMessage && (
+        <div className='error-message-visible'>
+          <h2>Déso, pas de concert de {userQuery} prévu prochainement</h2>
+          <button
+            type='button'
+            onClick={() => {
+              setErrorMessage(false);
+            }}
+          >
+            OK
+          </button>
+        </div>
+      )}
 
       {eventList ? (
         <MarkerClusterGroup
@@ -105,7 +108,7 @@ function App() {
         >
           {markersCoords.map((marker, index) => (
             <Marker key={index} position={marker.geocode} icon={customMarker}>
-              <Popup>
+              <Popup className='custom-popup'>
                 <Card
                   event={eventList[index]}
                   artistData={artistData}
