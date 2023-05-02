@@ -6,7 +6,7 @@ import facebook from '../../img/facebook.svg';
 import soundcloud from '../../img/soundcloud.svg';
 import axios from 'axios';
 
-const Card = ({ artistEvent, artistInfos, selectEvent, artist }) => {
+const Card = ({ event, artistData, artist }) => {
   const [lineUpArtist, setLineUpArtist] = useState(null);
   const [lastArtist, setLastArtist] = useState(null);
   const [lineUpInfos, setLineUpInfos] = useState();
@@ -68,24 +68,20 @@ const Card = ({ artistEvent, artistInfos, selectEvent, artist }) => {
 
   return (
     <section className='card-section'>
-      {artistEvent && (
-        <div
-          key={artistEvent.id}
-          className='container-card'
-          onClick={() => selectEvent(artistEvent)}
-        >
+      {event && (
+        <div key={event.id} className='container-card'>
           <div className='card'>
             <ul className='front-card'>
-              <li className='event-date'>{formatDate(artistEvent.datetime)}</li>
+              <li className='event-date'>{formatDate(event.datetime)}</li>
               <li className='artist-name'>
-                {artistInfos && artistInfos[0].strArtist}
+                {artistData && artistData[0].strArtist}
               </li>
               <li className='title-city-event'>
-                {artistEvent.venue.name} - {artistEvent.venue.city}
+                {event.venue.name} - {event.venue.city}
               </li>
 
               <ul className='other-artist'>
-                {artistEvent.lineup.map((name, index) => {
+                {event.lineup.map((name, index) => {
                   if (index === 4) {
                     return <li>Et d'autres...</li>;
                   } else if (index >= 5) {
@@ -103,7 +99,7 @@ const Card = ({ artistEvent, artistInfos, selectEvent, artist }) => {
                 })}
               </ul>
               <li className='url-ticket'>
-                <a href={artistEvent.url}>Acheter mon ticket</a>
+                <a href={event.url}>Acheter mon ticket</a>
               </li>
               <ul className='social-container'>
                 {spotifyUrl ? (
@@ -136,7 +132,7 @@ const Card = ({ artistEvent, artistInfos, selectEvent, artist }) => {
                 ) : null}
               </ul>
               <li className='video-cont'>
-                <Video id={artistInfos[0].idArtist} />
+                <Video id={artistData[0].idArtist} />
               </li>
             </ul>
           </div>
