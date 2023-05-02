@@ -14,8 +14,13 @@ function App() {
   const [eventList, setEventList] = useState(null);
   const [markersCoords, setMarkersCoords] = useState([]);
   const [errorMessage, setErrorMessage] = useState(false);
-  const [yaConcert, setYaConcert] = useState(true);
-  const [yaArtist, setYaArtist] = useState(true);
+  const [hasConcert, setHasConcert] = useState(true);
+  const [hasArtist, setHasArtist] = useState(true);
+
+  function setStateToInitial() {
+    setEventList(null);
+    setMarkersCoords([]);
+  }
 
   useEffect(() => {
     userQuery !== '' &&
@@ -26,11 +31,13 @@ function App() {
             .replace(' ', '%20')}/events?app_id=67`
         )
         .then((res) => {
-          res.data.length === 0 ? setYaConcert(false) : setEventList(res.data);
+          res.data.length > 0 ? setHasConcert(true) : setHasConcert(false);
+          setEventList(res.data);
         })
         .catch((err) => {
           console.error(err.message);
-          setYaArtist(false);
+          setHasArtist(false);
+          setHasConcert(false);
         });
   }, [userQuery]);
 
@@ -42,8 +49,10 @@ function App() {
           .replace(' ', '_')}`
       )
       .then((res) => {
+        console.log(res.data);
         setArtistData(res.data.artists);
-        res.data.artists === null && setEventList(null);
+        res.data.artists !== null && setHasArtist(true);
+        res.data.artists === null && setHasArtist(false);
       })
       .catch((err) => console.error(err.message));
   }, [userQuery]);
@@ -76,10 +85,9 @@ function App() {
   console.log(eventList);
 
   useEffect(() => {
-    setErrorMessage(
-      !eventList || (eventList && eventList.length === 0) ? true : false
-    );
-  }, [eventList]);
+    setErrorMessage(!hasConcert ? true : false);
+    setStateToInitial();
+  }, [hasConcert, hasArtist]);
 
   return (
     <MapContainer
@@ -92,11 +100,13 @@ function App() {
         query={setUserQuery}
         setErrorMessage={setErrorMessage}
         errorMessage={errorMessage}
+        setHasArtist={setHasArtist}
+        setHasConcert={setHasConcert}
       />
 
       {errorMessage && userQuery !== '' && (
         <div className='error-message-visible'>
-          {eventList ? (
+          {hasArtist ? (
             <h2>Déso, pas de concert de {userQuery} prévu prochainement</h2>
           ) : (
             <h2>Déso, {userQuery} existe pas la fami</h2>
