@@ -2,18 +2,21 @@ import { useState, useEffect } from 'react';
 import './styles/index.css';
 import axios from 'axios';
 import Card from './components/card/Card';
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, Popup, Map } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import { Icon, divIcon } from 'leaflet';
 import vinyl from './img/vinyl.svg';
 import MarkerClusterGroup from 'react-leaflet-cluster';
 import Query from './components/Query';
+import L from 'leaflet';
+
 function App() {
   const [userQuery, setUserQuery] = useState('');
   const [artistData, setArtistData] = useState(null);
   const [eventList, setEventList] = useState(null);
   const [markersCoords, setMarkersCoords] = useState([]);
   const [errorMessage, setErrorMessage] = useState(false);
+<<<<<<< HEAD
 
   useEffect(() => {
     axios
@@ -27,6 +30,33 @@ function App() {
         console.log(res);
       })
       .catch((err) => console.error(err.message));
+=======
+  const [hasConcert, setHasConcert] = useState(true);
+  const [hasArtist, setHasArtist] = useState(true);
+
+  function setStateToInitial() {
+    setEventList(null);
+    setMarkersCoords([]);
+  }
+
+  useEffect(() => {
+    userQuery !== '' &&
+      axios
+        .get(
+          `https://rest.bandsintown.com/artists/${userQuery
+            .toLowerCase()
+            .replace(' ', '%20')}/events?app_id=67`
+        )
+        .then((res) => {
+          res.data.length > 0 ? setHasConcert(true) : setHasConcert(false);
+          setEventList(res.data);
+        })
+        .catch((err) => {
+          console.error(err.message);
+          setHasArtist(false);
+          setHasConcert(false);
+        });
+>>>>>>> bf53d53fa99888f3255fe107f0326c6391d14a98
   }, [userQuery]);
 
   useEffect(() => {
@@ -37,7 +67,10 @@ function App() {
           .replace(' ', '_')}`
       )
       .then((res) => {
+        console.log(res.data);
         setArtistData(res.data.artists);
+        res.data.artists !== null && setHasArtist(true);
+        res.data.artists === null && setHasArtist(false);
       })
       .catch((err) => console.error(err.message));
   }, [userQuery]);
@@ -70,18 +103,31 @@ function App() {
   console.log(eventList);
 
   useEffect(() => {
+<<<<<<< HEAD
     setErrorMessage(
       !eventList || (eventList && eventList.length === 0) ? true : false
     );
   }, [eventList]);
+=======
+    setErrorMessage(!hasConcert ? true : false);
+    setStateToInitial();
+  }, [hasConcert, hasArtist]);
+
+  const corner1 = L.latLng(-100, -200);
+  const corner2 = L.latLng(90, 200);
+  const bounds = L.latLngBounds(corner1, corner2);
+>>>>>>> bf53d53fa99888f3255fe107f0326c6391d14a98
 
   return (
     <MapContainer
-      center={[17.913250433640037, 8.623437289329258]}
-      zoom={4}
-      minZoom={2}
+      center={[-10, 8.623437289329258]}
+      zoom={3}
+      minZoom={3}
+      maxBoundsViscosity={0}
+      maxBounds={bounds}
     >
       <TileLayer url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png' />
+<<<<<<< HEAD
       <Query query={setUserQuery} />
 
       {errorMessage && userQuery !== '' && (
@@ -91,6 +137,24 @@ function App() {
           ) : (
             <h2>Déso, {userQuery} c'est pas un vrai groupe</h2>
           )}
+=======
+      <Query
+        query={setUserQuery}
+        setErrorMessage={setErrorMessage}
+        errorMessage={errorMessage}
+        setHasArtist={setHasArtist}
+        setHasConcert={setHasConcert}
+      />
+
+      {errorMessage && userQuery !== '' && (
+        <div className='error-message-visible'>
+          {hasArtist ? (
+            <h2>Déso, pas de concert de {userQuery} prévu prochainement</h2>
+          ) : (
+            <h2>Déso, {userQuery} existe pas la fami</h2>
+          )}
+
+>>>>>>> bf53d53fa99888f3255fe107f0326c6391d14a98
           <button
             type='button'
             onClick={() => {
