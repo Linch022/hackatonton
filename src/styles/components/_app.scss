@@ -49,7 +49,14 @@
   background: rgb(253 253 253 / 51%);
   box-shadow: 3px -2px black, 3px -1px black;
   button {
-    width: 50px;
+    width: 90px;
+    height: 35px;
+    border-radius: 5px;
+    font-size: 1rem;
+    border: 3.5px solid #000000;
+    outline: 0px solid transparent;
+    background: rgb(253 253 253 / 51%);
+    box-shadow: 3px -2px black, 3px -1px black;
   }
 }
 
