@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Query = ({ query, setErrorBool, errorBool }) => {
+const Query = ({ query }) => {
   const handleSearchValue = () => {
     const input = document.getElementById('search-input');
     let { value } = input;
@@ -9,7 +9,6 @@ const Query = ({ query, setErrorBool, errorBool }) => {
       console.log(value);
       input.value = '';
     }
-    setErrorBool(!errorBool);
   };
 
   return (

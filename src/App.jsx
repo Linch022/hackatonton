@@ -14,20 +14,19 @@ function App() {
   const [eventList, setEventList] = useState(null);
   const [markersCoords, setMarkersCoords] = useState([]);
   const [errorMessage, setErrorMessage] = useState(false);
-  const [errorBool, setErrorBool] = useState(true);
 
   useEffect(() => {
-    userQuery !== '' &&
-      axios
-        .get(
-          `https://rest.bandsintown.com/artists/${userQuery
-            .toLowerCase()
-            .replace(' ', '%20')}/events?app_id=67`
-        )
-        .then((res) => {
-          setEventList(res.data);
-        })
-        .catch((err) => console.error(err.message));
+    axios
+      .get(
+        `https://rest.bandsintown.com/artists/${userQuery
+          .toLowerCase()
+          .replace(' ', '%20')}/events?app_id=67`
+      )
+      .then((res) => {
+        setEventList(res.data);
+        console.log(res);
+      })
+      .catch((err) => console.error(err.message));
   }, [userQuery]);
 
   useEffect(() => {
@@ -71,8 +70,10 @@ function App() {
   console.log(eventList);
 
   useEffect(() => {
-    setErrorMessage(eventList && eventList.length === 0 ? true : false);
-  }, [eventList, errorBool]);
+    setErrorMessage(
+      !eventList || (eventList && eventList.length === 0) ? true : false
+    );
+  }, [eventList]);
 
   return (
     <MapContainer
@@ -81,15 +82,15 @@ function App() {
       minZoom={2}
     >
       <TileLayer url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png' />
-      <Query
-        query={setUserQuery}
-        setErrorBool={setErrorBool}
-        errorBool={errorBool}
-      />
+      <Query query={setUserQuery} />
 
-      {errorMessage && (
+      {errorMessage && userQuery !== '' && (
         <div className='error-message-visible'>
-          <h2>Déso, pas de concert de {userQuery} prévu prochainement</h2>
+          {eventList ? (
+            <h2>Déso, pas de concert de {userQuery} prévu prochainement</h2>
+          ) : (
+            <h2>Déso, {userQuery} c'est pas un vrai groupe</h2>
+          )}
           <button
             type='button'
             onClick={() => {
