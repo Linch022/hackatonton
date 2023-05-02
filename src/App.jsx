@@ -13,6 +13,7 @@ function App() {
   const [artistData, setArtistData] = useState(null);
   const [eventList, setEventList] = useState(null);
   const [markersCoords, setMarkersCoords] = useState([]);
+  const [errorMessage, setErrorMessage] = useState('error-message-hidden');
 
   useEffect(() => {
     userQuery !== '' &&
@@ -67,6 +68,15 @@ function App() {
     });
   };
   console.log(eventList);
+
+  useEffect(() => {
+    setErrorMessage(
+      eventList && eventList.length === 0
+        ? 'error-message-visible'
+        : 'error-message-hidden'
+    );
+  }, [eventList]);
+
   return (
     <MapContainer
       center={[17.913250433640037, 8.623437289329258]}
@@ -75,6 +85,19 @@ function App() {
     >
       <TileLayer url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png' />
       <Query query={setUserQuery} />
+
+      <div className={errorMessage}>
+        <h2>Déso, pas de concert</h2>
+        <button
+          type='button'
+          onClick={() => {
+            setErrorMessage('error-message-hidden');
+          }}
+        >
+          OK
+        </button>
+      </div>
+
       {eventList ? (
         <MarkerClusterGroup
           chunkedLoading
