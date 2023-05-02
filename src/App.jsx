@@ -8,7 +8,6 @@ import { Icon, divIcon } from 'leaflet';
 import vinyl from './img/vinyl.svg';
 import MarkerClusterGroup from 'react-leaflet-cluster';
 import Query from './components/Query';
-
 function App() {
   const [userQuery, setUserQuery] = useState('');
   const [artistData, setArtistData] = useState(null);
@@ -58,6 +57,7 @@ function App() {
   const customMarker = new Icon({
     iconUrl: vinyl,
     iconSize: [38, 38],
+    className: 'anim-vinyl',
   });
 
   const createClusterIcon = (cluster) => {
