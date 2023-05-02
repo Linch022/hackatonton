@@ -2,12 +2,14 @@ import { useState, useEffect } from 'react';
 import './styles/index.css';
 import axios from 'axios';
 import Card from './components/card/Card';
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, Popup, Map } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import { Icon, divIcon } from 'leaflet';
 import vinyl from './img/vinyl.svg';
 import MarkerClusterGroup from 'react-leaflet-cluster';
 import Query from './components/Query';
+import L from 'leaflet';
+
 function App() {
   const [userQuery, setUserQuery] = useState('');
   const [artistData, setArtistData] = useState(null);
@@ -89,11 +91,17 @@ function App() {
     setStateToInitial();
   }, [hasConcert, hasArtist]);
 
+  const corner1 = L.latLng(-100, -200);
+  const corner2 = L.latLng(90, 200);
+  const bounds = L.latLngBounds(corner1, corner2);
+
   return (
     <MapContainer
-      center={[17.913250433640037, 8.623437289329258]}
-      zoom={4}
-      minZoom={2}
+      center={[-10, 8.623437289329258]}
+      zoom={3}
+      minZoom={3}
+      maxBoundsViscosity={0}
+      maxBounds={bounds}
     >
       <TileLayer url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png' />
       <Query
