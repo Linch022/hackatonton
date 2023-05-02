@@ -1,7 +1,8 @@
 import React from 'react';
 
-const Query = ({ query, setErrorBool, errorBool }) => {
+const Query = ({ query, setErrorMessage }) => {
   const handleSearchValue = () => {
+    setErrorMessage(false);
     const input = document.getElementById('search-input');
     let { value } = input;
     if (value !== '') {
@@ -9,7 +10,6 @@ const Query = ({ query, setErrorBool, errorBool }) => {
       console.log(value);
       input.value = '';
     }
-    setErrorBool(!errorBool);
   };
 
   return (

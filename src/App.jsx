@@ -14,7 +14,8 @@ function App() {
   const [eventList, setEventList] = useState(null);
   const [markersCoords, setMarkersCoords] = useState([]);
   const [errorMessage, setErrorMessage] = useState(false);
-  const [errorBool, setErrorBool] = useState(true);
+  const [yaConcert, setYaConcert] = useState(true);
+  const [yaArtist, setYaArtist] = useState(true);
 
   useEffect(() => {
     userQuery !== '' &&
@@ -25,9 +26,12 @@ function App() {
             .replace(' ', '%20')}/events?app_id=67`
         )
         .then((res) => {
-          setEventList(res.data);
+          res.data.length === 0 ? setYaConcert(false) : setEventList(res.data);
         })
-        .catch((err) => console.error(err.message));
+        .catch((err) => {
+          console.error(err.message);
+          setYaArtist(false);
+        });
   }, [userQuery]);
 
   useEffect(() => {
@@ -39,6 +43,7 @@ function App() {
       )
       .then((res) => {
         setArtistData(res.data.artists);
+        res.data.artists === null && setEventList(null);
       })
       .catch((err) => console.error(err.message));
   }, [userQuery]);
@@ -71,8 +76,10 @@ function App() {
   console.log(eventList);
 
   useEffect(() => {
-    setErrorMessage(eventList && eventList.length === 0 ? true : false);
-  }, [eventList, errorBool]);
+    setErrorMessage(
+      !eventList || (eventList && eventList.length === 0) ? true : false
+    );
+  }, [eventList]);
 
   return (
     <MapContainer
@@ -83,13 +90,18 @@ function App() {
       <TileLayer url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png' />
       <Query
         query={setUserQuery}
-        setErrorBool={setErrorBool}
-        errorBool={errorBool}
+        setErrorMessage={setErrorMessage}
+        errorMessage={errorMessage}
       />
 
-      {errorMessage && (
+      {errorMessage && userQuery !== '' && (
         <div className='error-message-visible'>
-          <h2>Déso, pas de concert de {userQuery} prévu prochainement</h2>
+          {eventList ? (
+            <h2>Déso, pas de concert de {userQuery} prévu prochainement</h2>
+          ) : (
+            <h2>Déso, {userQuery} existe pas la fami</h2>
+          )}
+
           <button
             type='button'
             onClick={() => {
