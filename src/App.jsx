@@ -97,7 +97,7 @@ function App() {
 
   return (
     <MapContainer
-      center={[-10, 8.623437289329258]}
+      center={[30, 8.623437289329258]}
       zoom={3}
       minZoom={3}
       maxBoundsViscosity={0}

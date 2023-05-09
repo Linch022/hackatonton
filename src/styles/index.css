@@ -330,12 +330,15 @@
   font-family: "Concert One", cursive;
   font-size: 1.5rem;
 }
+.search-box .input-div {
+  height: 100%;
+}
 .search-box .search-bar {
   height: 100%;
   width: 100%;
   border-radius: 5px;
   padding-left: 30px;
-  padding-right: 40px;
+  padding-right: 10px;
   font-family: "Concert One", cursive;
   font-size: 1.5rem;
   border: 3.5px solid #000000;
@@ -345,9 +348,11 @@
 }
 .search-box .search-bar::-moz-placeholder {
   color: #000000;
+  height: 100%;
 }
 .search-box .search-bar::placeholder {
   color: #000000;
+  height: 100%;
 }
 
 .leaflet-popup-content-wrapper {

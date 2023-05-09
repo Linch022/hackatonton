@@ -20,13 +20,15 @@ const Query = ({ query, setErrorMessage, setHasConcert, setHasArtist }) => {
   };
   return (
     <div className='search-box'>
-      <input
-        type='text'
-        className={`search-bar`}
-        id='search-input'
-        placeholder='Tape un artiste'
-        onKeyDown={handleKeyDown}
-      />
+      <div className='input-div'>
+        <input
+          type='text'
+          className={`search-bar`}
+          id='search-input'
+          placeholder='Tape un artiste'
+          onKeyDown={handleKeyDown}
+        />
+      </div>
       <button className='validate' onClick={handleSearchValue}>
         OK
       </button>
