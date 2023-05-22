@@ -16,7 +16,7 @@
   height: 3rem;
   width: 3rem;
   border-radius: 50%;
-  background: url('../img/vinyl.svg');
+  background: url('../img/vinylPink.svg');
   background-repeat: no-repeat;
   background-size: cover;
   transform: translate(-25%, -25%);
@@ -35,6 +35,8 @@
   border-radius: 5px;
   position: relative;
   display: flex;
+  justify-content: center;
+  align-items: center;
   flex-direction: column;
   margin: auto;
   top: 5%;
@@ -48,6 +50,9 @@
   outline: 0px solid transparent;
   background: rgb(253 253 253 / 51%);
   box-shadow: 3px -2px black, 3px -1px black;
+  .error-message-text {
+    text-align: center;
+  }
   button {
     width: 90px;
     height: 35px;
