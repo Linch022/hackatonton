@@ -32,6 +32,7 @@ const Card = ({ event, artistData, artist }) => {
         )
         .then((res) => {
           setLineUpInfos(res.data.artists);
+          console.log(res);
         })
         .catch((err) => console.error(err.message));
     }
@@ -138,7 +139,7 @@ const Card = ({ event, artistData, artist }) => {
                   <Video id={artistData[0].idArtist} />
                 </li>
               ) : (
-                <p>Coucou</p>
+                <p> Coucou</p>
               )}
             </ul>
           </div>
