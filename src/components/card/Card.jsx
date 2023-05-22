@@ -133,9 +133,13 @@ const Card = ({ event, artistData, artist }) => {
                   </li>
                 ) : null}
               </ul>
-              <li className='video-cont'>
-                <Video id={artistData[0].idArtist} />
-              </li>
+              {artistData ? (
+                <li className='video-cont'>
+                  <Video id={artistData[0].idArtist} />
+                </li>
+              ) : (
+                <p>Coucou</p>
+              )}
             </ul>
           </div>
           <div className={`artist-info ${openInfos}`}>

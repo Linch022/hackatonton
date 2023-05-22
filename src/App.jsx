@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import './styles/index.css';
 import axios from 'axios';
 import Card from './components/card/Card';
-import { MapContainer, TileLayer, Marker, Popup, Map } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import { Icon, divIcon } from 'leaflet';
 import vinyl from './img/vinyl.svg';
@@ -63,11 +63,13 @@ function App() {
     const markers = [];
     eventList?.map((event) => {
       const { longitude, latitude } = event.venue;
-      const geocode = [latitude, longitude];
-      const { lineup } = event;
-      const name = lineup[0].toLowerCase();
-      const marker = { geocode, name };
-      return markers.push(marker);
+      if (latitude && longitude) {
+        const geocode = [latitude, longitude];
+        const { lineup } = event;
+        const name = lineup[0].toLowerCase();
+        const marker = { geocode, name };
+        return markers.push(marker);
+      }
     });
     setMarkersCoords(markers);
   }, [eventList]);
