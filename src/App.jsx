@@ -17,12 +17,14 @@ import L from 'leaflet';
 function App() {
   const [userQuery, setUserQuery] = useState('');
   const [artistData, setArtistData] = useState(null);
-  const [eventList, setEventList] = useState(null);
+  const [eventList, setEventList] = useState([]);
+  const [newEventList, setNewEventList] = useState([]);
   const [markersCoords, setMarkersCoords] = useState([]);
   const [errorMessage, setErrorMessage] = useState(false);
   const [hasConcert, setHasConcert] = useState(true);
   const [hasArtist, setHasArtist] = useState(true);
   const [count, setCount] = useState(0);
+  const [searchedArtist, setSearchedArtist] = useState([]);
 
   function setStateToInitial() {
     setEventList(null);
@@ -38,8 +40,29 @@ function App() {
             .replace(' ', '%20')}/events?app_id=67`
         )
         .then((res) => {
+          console.log(res.data[0].artist.name);
           res.data.length > 0 ? setHasConcert(true) : setHasConcert(false);
-          setEventList(res.data);
+          if (eventList) {
+            if (
+              res.data[0].artist.name ===
+              searchedArtist.find(
+                (artist) => artist === res.data[0].artist.name
+              )
+            ) {
+              return null;
+            } else {
+              setEventList((prev) => [...prev, ...res.data]);
+              setNewEventList(res.data);
+              setSearchedArtist((prev) => [
+                ...prev,
+                ...[res.data[0].artist.name],
+              ]);
+            }
+          } else {
+            setEventList(res.data);
+            setNewEventList(res.data);
+            setSearchedArtist([res.data[0].artist.name]);
+          }
           if (count <= 4) {
             setCount(count + 1);
           } else {
@@ -71,19 +94,22 @@ function App() {
 
   useEffect(() => {
     const markers = [];
-    eventList?.map((event) => {
+    newEventList?.map((event) => {
       const { longitude, latitude } = event.venue;
       if (latitude && longitude) {
         const geocode = [latitude, longitude];
         const { lineup } = event;
         const name = lineup[0].toLowerCase();
-        const marker = { geocode, name };
+        const marker = { geocode, name, count };
         return markers.push(marker);
       }
     });
-    setMarkersCoords(markers);
-  }, [eventList]);
+    setMarkersCoords((prev) => [...prev, ...markers]);
+  }, [newEventList]);
 
+  console.log(markersCoords);
+  console.log(eventList);
+  console.log(searchedArtist);
   const customMarker1 = new Icon({
     iconUrl: vinylRed,
     iconSize: [38, 38],
@@ -115,7 +141,6 @@ function App() {
   });
 
   const customIcons = [
-    'QuelleEstLaCouleurDeTaString',
     customMarker1,
     customMarker2,
     customMarker3,
@@ -124,7 +149,6 @@ function App() {
   ];
 
   const selectedIcon = customIcons[count];
-  console.log(selectedIcon);
 
   const createClusterIcon = (cluster) => {
     return divIcon({
@@ -132,7 +156,6 @@ function App() {
       iconSize: [33, 33],
     });
   };
-  console.log(eventList);
 
   useEffect(() => {
     setErrorMessage(!hasConcert ? true : false);
@@ -188,17 +211,89 @@ function App() {
           chunkedLoading
           iconCreateFunction={createClusterIcon}
         >
-          {markersCoords.map((marker, index) => (
-            <Marker key={index} position={marker.geocode} icon={selectedIcon}>
-              <Popup className='custom-popup'>
-                <Card
-                  event={eventList[index]}
-                  artistData={artistData}
-                  artist={eventList[0]?.artist}
-                />
-              </Popup>
-            </Marker>
-          ))}
+          {markersCoords.map((marker, index) => {
+            if (marker.count === 1) {
+              return (
+                <Marker
+                  key={index}
+                  position={marker.geocode}
+                  icon={customMarker1}
+                >
+                  <Popup className='custom-popup'>
+                    <Card
+                      event={eventList[index]}
+                      artistData={artistData}
+                      artist={eventList[0]?.artist}
+                    />
+                  </Popup>
+                </Marker>
+              );
+            } else if (marker.count === 2) {
+              return (
+                <Marker
+                  key={index}
+                  position={marker.geocode}
+                  icon={customMarker2}
+                >
+                  <Popup className='custom-popup'>
+                    <Card
+                      event={eventList[index]}
+                      artistData={artistData}
+                      artist={eventList[0]?.artist}
+                    />
+                  </Popup>
+                </Marker>
+              );
+            } else if (marker.count === 3) {
+              return (
+                <Marker
+                  key={index}
+                  position={marker.geocode}
+                  icon={customMarker3}
+                >
+                  <Popup className='custom-popup'>
+                    <Card
+                      event={eventList[index]}
+                      artistData={artistData}
+                      artist={eventList[0]?.artist}
+                    />
+                  </Popup>
+                </Marker>
+              );
+            } else if (marker.count === 4) {
+              return (
+                <Marker
+                  key={index}
+                  position={marker.geocode}
+                  icon={customMarker4}
+                >
+                  <Popup className='custom-popup'>
+                    <Card
+                      event={eventList[index]}
+                      artistData={artistData}
+                      artist={eventList[0]?.artist}
+                    />
+                  </Popup>
+                </Marker>
+              );
+            } else {
+              return (
+                <Marker
+                  key={index}
+                  position={marker.geocode}
+                  icon={customMarker5}
+                >
+                  <Popup className='custom-popup'>
+                    <Card
+                      event={eventList[index]}
+                      artistData={artistData}
+                      artist={eventList[0]?.artist}
+                    />
+                  </Popup>
+                </Marker>
+              );
+            }
+          })}
         </MarkerClusterGroup>
       ) : null}
     </MapContainer>
